@@ -1,15 +1,17 @@
 name: sonar_env
 channels:
+  - pytorch
+  - nvidia
   - defaults
   - conda-forge
 dependencies:
   - python=3.9
   - pip
   - numpy<2
-  - pytorch=2.0.1=py3.9_cuda11.8_cudnn8.6.0_0  # match GPU and CUDA
-  - torchvision=0.15.2=py39_cu118_default
+  - pytorch=2.0.1
+  - torchvision=0.15.2
   - torchaudio=2.0.2
-  - detectron2=0.6 # conda channel detectron2
+  - cudatoolkit=11.8
   - opencv
   - albumentations
   - pip:
