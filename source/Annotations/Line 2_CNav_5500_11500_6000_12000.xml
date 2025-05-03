@@ -1,0 +1,26 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_5500_11500_6000_12000.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_5500_11500_6000_12000.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>470.541667196715</xmin>
+            <ymin>153.98739226303042</ymin>
+            <xmax>500.0</xmax>
+            <ymax>162.01260773696958</ymax>
+        </bndbox>
+    </object>
+</annotation>
