@@ -1,0 +1,125 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_9908_14500_10408_15000.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_9908_14500_10408_15000.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>163.0</xmin>
+            <ymin>242.89304469840317</ymin>
+            <xmax>336.04195582564716</xmax>
+            <ymax>253.10695530159865</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>131.75000045432716</xmin>
+            <ymin>242.89304469840317</ymin>
+            <xmax>194.24999954567284</xmax>
+            <ymax>253.10695530159865</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>449.8930446984032</ymin>
+            <xmax>218.54495309018057</xmax>
+            <ymax>460.10695530159865</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>449.8930446984032</ymin>
+            <xmax>5.833333030448557</xmax>
+            <ymax>460.10695530159865</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>0.0</ymin>
+            <xmax>133.99449549432939</xmax>
+            <ymax>7.377390258510786</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>359.0</xmin>
+            <ymin>427.9873922630304</ymin>
+            <xmax>442.34684059714164</xmax>
+            <ymax>436.0126077369696</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>322.5416671967141</xmin>
+            <ymin>427.9873922630304</ymin>
+            <xmax>395.45833280328407</xmax>
+            <ymax>436.0126077369696</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>225.08173982765948</ymin>
+            <xmax>60.92901124612399</xmax>
+            <ymax>230.91826017234234</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>337.0</xmin>
+            <ymin>165.44652234920068</ymin>
+            <xmax>425.40523166719686</xmax>
+            <ymax>170.5534776507975</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>310.9583337119384</xmin>
+            <ymin>165.44652234920068</ymin>
+            <xmax>363.0416662880598</xmax>
+            <ymax>170.5534776507975</ymax>
+        </bndbox>
+    </object>
+</annotation>

@@ -1,0 +1,125 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_8500_28000_9000_28500.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_8500_28000_9000_28500.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>457.71695730611464</ymin>
+            <xmax>137.0128078273865</xmax>
+            <ymax>464.2830426938817</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>108.0</xmin>
+            <ymin>469.71695730611464</ymin>
+            <xmax>245.58989084409586</xmax>
+            <ymax>476.2830426938817</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>87.16666696955144</xmin>
+            <ymin>469.71695730611464</ymin>
+            <xmax>128.83333303044856</xmax>
+            <ymax>476.2830426938817</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>395.0</xmin>
+            <ymin>497.0817398276595</ymin>
+            <xmax>500.0</xmax>
+            <ymax>500.0</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>358.5416671967141</xmin>
+            <ymin>497.0817398276595</ymin>
+            <xmax>431.45833280328407</xmax>
+            <ymax>500.0</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>465.4465223492007</ymin>
+            <xmax>19.8156859923547</xmax>
+            <ymax>470.5534776507993</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>222.0</xmin>
+            <ymin>440.1760873922867</ymin>
+            <xmax>374.1698646168279</xmax>
+            <ymax>443.8239126077133</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>206.37500022716267</xmin>
+            <ymin>440.1760873922867</ymin>
+            <xmax>237.6249997728355</xmax>
+            <ymax>443.8239126077133</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>271.0</xmin>
+            <ymin>481.1760873922867</ymin>
+            <xmax>342.00812648175634</xmax>
+            <ymax>484.8239126077133</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>244.9583337119384</xmin>
+            <ymin>481.1760873922867</ymin>
+            <xmax>297.0416662880598</xmax>
+            <ymax>484.8239126077133</ymax>
+        </bndbox>
+    </object>
+</annotation>

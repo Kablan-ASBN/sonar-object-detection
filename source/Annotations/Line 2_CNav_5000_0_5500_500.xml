@@ -1,0 +1,37 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_5000_0_5500_500.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_5000_0_5500_500.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>157.25782721994523</ymin>
+            <xmax>67.35906602891828</xmax>
+            <ymax>166.74217278005477</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>96.35217478457325</ymin>
+            <xmax>66.44280170042111</xmax>
+            <ymax>103.64782521542674</ymax>
+        </bndbox>
+    </object>
+</annotation>

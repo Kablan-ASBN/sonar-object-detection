@@ -1,0 +1,59 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_1500_15000_2000_15500.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_1500_15000_2000_15500.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>77.0</xmin>
+            <ymin>74.6226097414874</ymin>
+            <xmax>217.16728616361252</xmax>
+            <ymax>83.37739025851079</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>30.12500068149052</xmin>
+            <ymin>74.6226097414874</ymin>
+            <xmax>123.87499931850971</xmax>
+            <ymax>83.37739025851079</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>131.0</xmin>
+            <ymin>446.4465223492007</ymin>
+            <xmax>160.39905543202508</xmax>
+            <ymax>451.5534776507975</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>99.75000045432694</xmin>
+            <ymin>446.4465223492007</ymin>
+            <xmax>162.24999954567306</xmax>
+            <ymax>451.5534776507975</ymax>
+        </bndbox>
+    </object>
+</annotation>

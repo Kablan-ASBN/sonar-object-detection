@@ -1,0 +1,125 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_6000_9000_6500_9500.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_6000_9000_6500_9500.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>473.0</xmin>
+            <ymin>113.25782721994437</ymin>
+            <xmax>500.0</xmax>
+            <ymax>122.7421727800538</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>441.75000045432716</xmin>
+            <ymin>113.25782721994437</ymin>
+            <xmax>500.0</xmax>
+            <ymax>122.7421727800538</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>484.0</xmin>
+            <ymin>165.71695730611646</ymin>
+            <xmax>500.0</xmax>
+            <ymax>172.28304269388536</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>442.3333339391029</xmin>
+            <ymin>165.71695730611646</ymin>
+            <xmax>500.0</xmax>
+            <ymax>172.28304269388536</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>267.0</xmin>
+            <ymin>224.71695730611646</ymin>
+            <xmax>328.93405889541555</xmax>
+            <ymax>231.28304269388536</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>230.54166719671503</xmin>
+            <ymin>224.71695730611646</ymin>
+            <xmax>303.4583328032859</xmax>
+            <ymax>231.28304269388536</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>126.0</xmin>
+            <ymin>335.0817398276595</ymin>
+            <xmax>215.11749744574354</xmax>
+            <ymax>340.91826017234234</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>94.75000045432716</xmin>
+            <ymin>335.0817398276595</ymin>
+            <xmax>157.24999954567284</xmax>
+            <ymax>340.91826017234234</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>451.0</xmin>
+            <ymin>103.44652234920068</ymin>
+            <xmax>500.0</xmax>
+            <ymax>108.5534776507975</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>414.541667196715</xmin>
+            <ymin>103.44652234920068</ymin>
+            <xmax>487.4583328032859</xmax>
+            <ymax>108.5534776507975</ymax>
+        </bndbox>
+    </object>
+</annotation>

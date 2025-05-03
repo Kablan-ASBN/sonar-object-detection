@@ -1,0 +1,301 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_2000_51500_2500_52000.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_2000_51500_2500_52000.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>368.0</xmin>
+            <ymin>104.88043696142995</ymin>
+            <xmax>407.4677532888304</xmax>
+            <ymax>123.11956303856277</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>336.75000045432716</xmin>
+            <ymin>104.88043696142995</ymin>
+            <xmax>399.2499995456733</xmax>
+            <ymax>123.11956303856277</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>444.0</xmin>
+            <ymin>120.43391461222927</ymin>
+            <xmax>500.0</xmax>
+            <ymax>133.56608538776345</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>386.708334166266</xmin>
+            <ymin>120.43391461222927</ymin>
+            <xmax>500.0</xmax>
+            <ymax>133.56608538776345</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>341.0</xmin>
+            <ymin>131.16347965531895</ymin>
+            <xmax>500.0</xmax>
+            <ymax>142.83652034468105</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>299.33333393910243</xmin>
+            <ymin>131.16347965531895</ymin>
+            <xmax>382.6666660608971</xmax>
+            <ymax>142.83652034468105</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>455.75000045432716</xmin>
+            <ymin>152.16347965531895</ymin>
+            <xmax>500.0</xmax>
+            <ymax>163.83652034468105</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>346.0</xmin>
+            <ymin>340.9873922630286</ymin>
+            <xmax>475.7868949413073</xmax>
+            <ymax>349.0126077369641</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>314.75000045432716</xmin>
+            <ymin>340.9873922630286</ymin>
+            <xmax>377.2499995456733</xmax>
+            <ymax>349.0126077369641</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>101.35217478457344</ymin>
+            <xmax>283.72663842293787</xmax>
+            <ymax>108.64782521542656</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>101.35217478457344</ymin>
+            <xmax>30.66666606089734</xmax>
+            <ymax>108.64782521542656</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>276.0</xmin>
+            <ymin>238.71695730611827</ymin>
+            <xmax>500.0</xmax>
+            <ymax>245.283042693889</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>244.75000045432716</xmin>
+            <ymin>238.71695730611827</ymin>
+            <xmax>307.2499995456733</xmax>
+            <ymax>245.283042693889</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>292.0</xmin>
+            <ymin>254.08173982765584</ymin>
+            <xmax>500.0</xmax>
+            <ymax>259.9182601723369</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>260.75000045432716</xmin>
+            <ymin>254.08173982765584</ymin>
+            <xmax>323.2499995456733</xmax>
+            <ymax>259.9182601723369</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>249.0</xmin>
+            <ymin>368.08173982765584</ymin>
+            <xmax>371.71464709068096</xmax>
+            <ymax>373.9182601723369</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>217.75000045432716</xmin>
+            <ymin>368.08173982765584</ymin>
+            <xmax>280.2499995456733</xmax>
+            <ymax>373.9182601723369</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>195.0</xmin>
+            <ymin>455.4465223492007</ymin>
+            <xmax>356.1648852993376</xmax>
+            <ymax>460.5534776507993</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>163.75000045432716</xmin>
+            <ymin>455.4465223492007</ymin>
+            <xmax>226.2499995456733</xmax>
+            <ymax>460.5534776507993</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>178.81130487074552</ymin>
+            <xmax>72.70043805647765</xmax>
+            <ymax>183.18869512925448</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>119.0</xmin>
+            <ymin>468.8113048707455</ymin>
+            <xmax>196.09788217144296</xmax>
+            <ymax>473.1886951292545</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>92.9583337119393</xmin>
+            <ymin>468.8113048707455</ymin>
+            <xmax>145.04166628806115</xmax>
+            <ymax>473.1886951292545</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>422.0</xmin>
+            <ymin>145.54086991382792</ymin>
+            <xmax>462.89470619038684</xmax>
+            <ymax>148.45913008617208</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>401.16666696955144</xmin>
+            <ymin>145.54086991382792</ymin>
+            <xmax>442.833333030449</xmax>
+            <ymax>148.45913008617208</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>43.0</xmin>
+            <ymin>302.5408699138279</ymin>
+            <xmax>380.5205576518979</xmax>
+            <ymax>305.4591300861721</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>32.58333348477572</xmin>
+            <ymin>302.5408699138279</ymin>
+            <xmax>53.41666651522428</xmax>
+            <ymax>305.4591300861721</ymax>
+        </bndbox>
+    </object>
+</annotation>

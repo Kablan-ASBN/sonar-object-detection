@@ -1,0 +1,125 @@
+<annotation>
+    <folder>object_detection</folder>
+    <filename>Line 2_CNav_8500_12500_9000_13000.jpg</filename>
+    <path>C:\seabed\d_adapt\TransferLearningForSonarData\examples\domain_adaptation\object_detection\Line 2_CNav_8500_12500_9000_13000.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>500</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>462.12500068148984</xmin>
+            <ymin>378.6226097414874</ymin>
+            <xmax>500.0</xmax>
+            <ymax>387.3773902585108</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>59.0</xmin>
+            <ymin>387.9873922630304</ymin>
+            <xmax>321.0048348188029</xmax>
+            <ymax>396.0126077369696</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>17.333333939102886</xmin>
+            <ymin>387.9873922630304</ymin>
+            <xmax>100.66666606089711</xmax>
+            <ymax>396.0126077369696</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>0.0</xmin>
+            <ymin>412.9873922630304</ymin>
+            <xmax>179.54769604307512</xmax>
+            <ymax>421.0126077369696</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>395.0</xmin>
+            <ymin>387.0817398276595</ymin>
+            <xmax>500.0</xmax>
+            <ymax>392.91826017234234</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>368.9583337119384</xmin>
+            <ymin>387.0817398276595</ymin>
+            <xmax>421.0416662880598</xmax>
+            <ymax>392.91826017234234</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>401.0</xmin>
+            <ymin>53.44652234920068</ymin>
+            <xmax>500.0</xmax>
+            <ymax>58.553477650797504</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>369.75000045432716</xmin>
+            <ymin>53.44652234920068</ymin>
+            <xmax>432.24999954567284</xmax>
+            <ymax>58.553477650797504</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>shadow</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>325.0</xmin>
+            <ymin>147.44652234920068</ymin>
+            <xmax>500.0</xmax>
+            <ymax>152.5534776507975</ymax>
+        </bndbox>
+    </object>    <object>
+        <name>rock</name>
+        <pose>Unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>304.16666696955144</xmin>
+            <ymin>147.44652234920068</ymin>
+            <xmax>345.83333303044856</xmax>
+            <ymax>152.5534776507975</ymax>
+        </bndbox>
+    </object>
+</annotation>
