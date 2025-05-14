@@ -1,2 +1,34 @@
+# Ignore Python cache and virtual environment files
+__pycache__/
+*.pyc
+.env
+.venv
+
+# Ignore local editor and workspace settings
+.vscode/
+*.code-workspace
+
+# Ignore system-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Jupyter notebook auto-checkpoints and temp outputs
+.ipynb_checkpoints/
+*.ipynb_out
+*.ipynb~*
+
+# Ignore model weights (pushed to Drive or LFS instead)
 checkpoints/*.pth
-checkpoints/*.pth
+models/**/*.pth
+
+# Ignore batch inference output images and CSVs
+outputs/vis/
+outputs/preds.csv
+outputs/*.png
+outputs/*.jpg
+
+# Optional: if I don’t want to version data folders, uncomment below
+# data/
+
+# Google Colab default folder if synced locally
+sample_data/

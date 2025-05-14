@@ -1,56 +1,67 @@
 # scripts/inference_and_visualization.py
-# Step 1.7 — Batch inference on full JPEGImages folder using Seabed.ai's pretrained model
+# Batch inference on all sonar images using trained Faster R-CNN model (torchvision)
 
 import os
 import cv2
 import csv
+import torch
 import pandas as pd
+import numpy as np
+from PIL import Image
 from pathlib import Path
-from detectron2.utils.visualizer import Visualizer
-from detectron2.data import MetadataCatalog
-from load_model import load_model
+from torchvision.transforms import ToTensor
+from torchvision.models.detection import fasterrcnn_resnet50_fpn
+from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 # Define project paths
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-IMG_DIR = PROJECT_ROOT / "source" / "JPEGImages"
+IMG_DIR = PROJECT_ROOT / "data" / "line2voc" / "JPEGImages"
 OUTPUT_DIR = PROJECT_ROOT / "outputs" / "vis"
 PRED_CSV = PROJECT_ROOT / "outputs" / "preds.csv"
-MODEL_PATH = PROJECT_ROOT / "checkpoints" / "model_0007959.pth"
+MODEL_PATH = PROJECT_ROOT / "checkpoints" / "baseline_sonar_fasterrcnn.pth"
 
 # Ensure output folders exist
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 PRED_CSV.parent.mkdir(parents=True, exist_ok=True)
 
-# Load Seabed.ai's pretrained Detectron2 model
-predictor, cfg = load_model(str(MODEL_PATH))
+# Set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Set padded metadata to avoid IndexError when drawing predictions
-MetadataCatalog.get("sonar_dataset").set(thing_classes=["object"] * 100)
+# Load model
+model = fasterrcnn_resnet50_fpn(pretrained=False)
+num_classes = 3  # background + object + object_alt
+in_features = model.roi_heads.box_predictor.cls_score.in_features
+model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
+model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
+model.to(device)
+model.eval()
 
-# Collect all predictions here
+# Store predictions
 all_preds = []
 
-# Loop over all sonar images in JPEGImages folder
+# Run batch inference
 for img_path in IMG_DIR.glob("*.jpg"):
-    image = cv2.imread(str(img_path))
-    if image is None:
-        print(f"Could not read image: {img_path}")
-        continue
+    image_pil = Image.open(img_path).convert("RGB")
+    image_tensor = ToTensor()(image_pil).unsqueeze(0).to(device)
 
-    outputs = predictor(image)
-    instances = outputs["instances"].to("cpu")
+    with torch.no_grad():
+        output = model(image_tensor)[0]
 
-    # Extract predictions (if any)
-    boxes = instances.pred_boxes.tensor.numpy() if instances.has("pred_boxes") else []
-    classes = instances.pred_classes.numpy() if instances.has("pred_classes") else []
-    scores = instances.scores.numpy() if instances.has("scores") else []
+    boxes = output["boxes"].cpu()
+    scores = output["scores"].cpu()
+    labels = output["labels"].cpu()
 
-    # Store each prediction row into all_preds
+    img_np = cv2.cvtColor(np.array(image_pil), cv2.COLOR_RGB2BGR)
+
     for i in range(len(boxes)):
-        x1, y1, x2, y2 = boxes[i]
-        class_id = int(classes[i])
-        score = float(scores[i])
+        score = scores[i].item()
+        if score < 0.5:
+            continue
 
+        x1, y1, x2, y2 = boxes[i].int().tolist()
+        class_id = labels[i].item()
+
+        # Save prediction
         all_preds.append({
             "filename": img_path.name,
             "class_id": class_id,
@@ -61,15 +72,17 @@ for img_path in IMG_DIR.glob("*.jpg"):
             "ymax": y2,
         })
 
-    # Visualize predictions and save images
-    v = Visualizer(image[:, :, ::-1], MetadataCatalog.get("sonar_dataset"), scale=1.2)
-    out = v.draw_instance_predictions(instances)
-    out_img = out.get_image()[:, :, ::-1]
-    cv2.imwrite(str(OUTPUT_DIR / img_path.name), out_img)
+        # Draw box
+        cv2.rectangle(img_np, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(img_np, f"{score:.2f}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 1)
 
-# Save predictions to CSV
+    # Save visualized image
+    out_path = OUTPUT_DIR / img_path.name
+    cv2.imwrite(str(out_path), img_np)
+
+# Save CSV with predictions
 df = pd.DataFrame(all_preds)
 df.to_csv(PRED_CSV, index=False)
 
 print(f"Inference complete. Visuals saved to: {OUTPUT_DIR}")
-print(f"Predictions saved to CSV: {PRED_CSV}")
+print(f"Predictions saved to: {PRED_CSV}")

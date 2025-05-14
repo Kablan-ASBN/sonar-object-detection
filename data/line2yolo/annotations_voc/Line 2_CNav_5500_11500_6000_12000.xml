@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<annotation>
+  <folder>images</folder>
+  <filename>Line 2_CNav_5500_11500_6000_12000.jpg</filename>
+  <size>
+    <width>500</width>
+    <height>500</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>object</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>470</xmin>
+      <ymin>153</ymin>
+      <xmax>500</xmax>
+      <ymax>162</ymax>
+    </bndbox>
+  </object>
+</annotation>
