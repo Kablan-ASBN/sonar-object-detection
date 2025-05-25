@@ -1,29 +1,42 @@
-# Python artifacts
+# ============================
+# Python and System Artifacts
+# ============================
+
 __pycache__/
 *.pyc
 .venv/
 .env
-
-# Editor settings
-.vscode/
-*.code-workspace
-
-# System files
 .DS_Store
 Thumbs.db
 
-# Jupyter temp files
+# ============================
+# IDEs and Jupyter Settings
+# ============================
+
+.vscode/
+*.code-workspace
 .ipynb_checkpoints/
 
-# Output predictions and visuals
+# ============================
+# Model Checkpoints (Too Large)
+# ============================
+
+checkpoints/*.pth
+*.pth
+
+
+# ============================
+# Output Predictions and Visualizations
+# ============================
+
 outputs/*.csv
 outputs/vis/
 outputs/vis_denoised/
 outputs/vis_augmented/
 
-# Checkpoints (too large for GitHub)
-checkpoints/*.pth
-*.pth
+# ============================
+# DANN Phase – Keep These!
+# ============================
 
-# Optional: uncomment to ignore data folders
-# data/
+!outputs/dann_vis/
+!outputs/preds_dann.csv
