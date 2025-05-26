@@ -1,42 +1,29 @@
-# ============================
-# Python and System Artifacts
-# ============================
-
+# Python build and runtime artifacts
 __pycache__/
 *.pyc
 .venv/
 .env
+
+# IDE and editor files
+.vscode/
+*.code-workspace
+
+# System-generated files
 .DS_Store
 Thumbs.db
 
-# ============================
-# IDEs and Jupyter Settings
-# ============================
-
-.vscode/
-*.code-workspace
+# Jupyter internals
 .ipynb_checkpoints/
 
-# ============================
-# Model Checkpoints (Too Large)
-# ============================
-
-checkpoints/*.pth
-*.pth
-
-
-# ============================
-# Output Predictions and Visualizations
-# ============================
-
-outputs/*.csv
+# Output folders - keep .csv files, skip visualizations
 outputs/vis/
 outputs/vis_denoised/
 outputs/vis_augmented/
+outputs/dann_vis/
 
-# ============================
-# DANN Phase – Keep These!
-# ============================
+# Model checkpoints - not pushing .pth files (too large for GitHub)
+checkpoints/
+*.pth
 
-!outputs/dann_vis/
-!outputs/preds_dann.csv
+# Optional: raw datasets can be ignored if stored externally
+# data/

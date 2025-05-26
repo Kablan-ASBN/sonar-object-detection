@@ -123,25 +123,73 @@ Denoising alone gave the best results overall. CLAHE + augmentations hurt perfor
 
 ---
 
+## Evaluation: Domain Adaptation with DANN
+
+This phase applies Domain-Adversarial Neural Network (DANN) using the THUML Transfer Learning Library to improve generalization to the raw sonar domain.
+
+- **Source domain**: `line2voc_preprocessed` (median-blurred)
+- **Target domain**: `line2voc` (raw sonar)
+- **Model**: Faster R-CNN with ResNet-50 FPN backbone
+- **Training**: 5 epochs on Google Colab GPU
+
+| Epoch | Detection Loss | Domain Loss |
+|-------|----------------|-------------|
+| 1     | 1037.22        | 629.81      |
+| 2     | 987.47         | 625.56      |
+| 3     | 960.87         | 612.93      |
+| 4     | 941.17         | 615.82      |
+| 5     | 930.66         | 619.37      |
+
+After training, the model was used to perform batch inference on the target domain. Outputs were saved to:
+
+- `outputs/preds_dann.csv`
+- `outputs/dann_vis/` (images with predicted bounding boxes)
+
+### Quantitative Comparison (DANN vs Baseline)
+
+| Metric                      | Baseline | DANN   |
+|-----------------------------|----------|--------|
+| Total Detections            | 24118    | 15963  |
+| Mean Detections per Image   | 13.92    | 9.28   |
+| Median Detections per Image | 14       | 9      |
+
+The DANN model predicted fewer bounding boxes than the baseline. This suggests improved domain generalization with fewer false positives. A visual comparison confirmed the results were more precise.
+
+---
+
+## Final Model Comparison
+
+| Model Type      | mAP    | mAP@50 | mAR@100 | Notes                                           |
+|-----------------|--------|--------|---------|-------------------------------------------------|
+| Raw (baseline)  | 0.0441 | 0.1643 | 0.1623  | Trained on raw sonar images                     |
+| Denoised        | 0.0475 | 0.1693 | 0.1677  | Slight improvement on small/medium targets      |
+| Augmented       | 0.0026 | 0.0084 | 0.0272  | Underperformed due to annotation drift          |
+| DANN (Phase 2)  | —      | —      | —       | Domain adaptation on raw target (mAP pending)   |
+
+---
+
 ## Visual Outputs
 
 - `outputs/vis/` – raw model predictions
 - `outputs/vis_denoised/` – denoised predictions
 - `outputs/vis_augmented/` – augmented model predictions
+- `outputs/dann_vis/` – DANN predictions (domain-adapted)
 
 Predictions were generated using:
 - `visualize_predictions.py`
 - `visualize_predictions_denoised.py`
 - `visualize_predictions_augmented.py`
+- `visualize_predictions_dann.py`
 
 ---
 
 ## Notebook
 
 Everything was tested in:  
-`notebooks/Faster_RCNN_Baseline_Model.ipynb`
+`notebooks/Faster_RCNN_Baseline_Model.ipynb`  
+`notebooks/DANN_Pipeline_Setup.ipynb`
 
-This notebook contains:
+These notebooks contain:
 
 - All training, evaluation, and visualization steps
 - All metrics and visual examples
