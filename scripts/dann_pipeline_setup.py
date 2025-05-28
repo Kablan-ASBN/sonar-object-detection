@@ -357,7 +357,7 @@ for epoch in range(epochs):
 
 """## **Saving the DANN-trained model**"""
 
-torch.save(model.state_dict(), "/content/drive/MyDrive/sonar-object-detection/dann_sonar_fasterrcnn.pth")
+torch.save(model.state_dict(), "/content/drive/MyDrive/sonar-object-detection/checkpoints/dann_sonar_fasterrcnn.pth")
 
 """## **Batch Inference on Target Domain**"""
 
@@ -434,14 +434,25 @@ def visualize_predictions(csv_path, image_dir, output_dir, score_thresh=0.5):
     df = pd.read_csv(csv_path)
     image_dir = Path(image_dir)
     output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Remove old images from output folder
+    if output_dir.exists():
+        for file in output_dir.glob("*.jpg"):
+            file.unlink()
+        print(f"Old images deleted from: {output_dir}")
+    else:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        print(f"Output folder created: {output_dir}")
 
     grouped = df[df["score"] >= score_thresh].groupby("filename")
+
+    print(f"Rendering {len(grouped)} annotated images...")
 
     for filename, group in tqdm(grouped, desc="Visualizing Predictions"):
         img_path = image_dir / filename
         img = cv2.imread(str(img_path))
         if img is None:
+            print(f"Warning: Image not found - {img_path}")
             continue
 
         for _, row in group.iterrows():
@@ -454,7 +465,9 @@ def visualize_predictions(csv_path, image_dir, output_dir, score_thresh=0.5):
         out_path = output_dir / filename
         cv2.imwrite(str(out_path), img)
 
-# Run prediction
+    print(f"New predictions saved to: {output_dir}")
+
+# Run visualization
 visualize_predictions(
     csv_path="/content/drive/MyDrive/sonar-object-detection/outputs/preds_dann.csv",
     image_dir="data/line2voc/JPEGImages",
@@ -546,3 +559,123 @@ plt.ylabel("Number of Images")
 plt.tight_layout()
 plt.grid(True)
 plt.show()
+
+"""## **Sanitize test.txt**
+*This step ensures that the test.txt file — which lists the test image IDs — uses consistent filenames. Since the actual image and annotation files had underscores (e.g., Line_2_CNav_...) but test.txt used spaces (e.g., Line 2_CNav_...), this mismatch would lead to file-not-found errors during evaluation. We sanitize test.txt by replacing spaces with underscores in all entries so that it correctly matches the actual filenames in the dataset folders.*
+"""
+
+from pathlib import Path
+
+def sanitize_test_txt(voc_root):
+    test_txt_path = Path(voc_root) / "ImageSets/Main/test.txt"
+
+    with open(test_txt_path, "r") as f:
+        ids = [line.strip().replace(" ", "_") for line in f.readlines()]
+
+    with open(test_txt_path, "w") as f:
+        f.write("\n".join(ids))
+
+    print(f" test.txt sanitized with underscores: {len(ids)} entries")
+
+sanitize_test_txt("/content/drive/MyDrive/sonar-object-detection/data/line2voc")
+
+"""## **Rename image files to match test.txt**
+*This step renames all .jpg image files and .xml annotation files inside the dataset so they consistently use underscores instead of spaces. Filenames with spaces can cause issues in file handling, especially when building datasets or running batch inference. Renaming these files ensures compatibility with Python's file reading functions and guarantees that all files listed in test.txt actually exist in the JPEGImages/ and Annotations/ folders.*
+"""
+
+from pathlib import Path
+
+def rename_files_to_underscores(folder_path):
+    folder = Path(folder_path)
+    img_dir = folder / "JPEGImages"
+    ann_dir = folder / "Annotations"
+
+    renamed = 0
+    for img_file in img_dir.glob("*.jpg"):
+        new_name = img_file.name.replace(" ", "_")
+        if new_name != img_file.name:
+            img_file.rename(img_dir / new_name)
+            renamed += 1
+
+    for xml_file in ann_dir.glob("*.xml"):
+        new_name = xml_file.name.replace(" ", "_")
+        if new_name != xml_file.name:
+            xml_file.rename(ann_dir / new_name)
+            renamed += 1
+
+    print(f"Renamed {renamed} files with underscores.")
+
+rename_files_to_underscores("/content/drive/MyDrive/sonar-object-detection/data/line2voc")
+
+"""## **DANN Model Evaluation**"""
+
+# Install torchmetrics
+!pip install -q torchmetrics
+
+# Import required libraries to evaluate the DANN Model
+import torch
+from torchmetrics.detection.mean_ap import MeanAveragePrecision
+from torch.utils.data import DataLoader
+from torchvision.transforms import ToTensor
+from torchvision.models.detection import fasterrcnn_resnet50_fpn
+from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
+
+# Load the trained DANN model from checkpoints
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+model = fasterrcnn_resnet50_fpn(weights=None)
+in_features = model.roi_heads.box_predictor.cls_score.in_features
+model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes=2)  # background + object
+
+checkpoint_path = "/content/drive/MyDrive/sonar-object-detection/checkpoints/dann_sonar_fasterrcnn.pth"
+model.load_state_dict(torch.load(checkpoint_path, map_location=device))
+model.to(device)
+model.eval()
+
+# Load the test set from the target domain
+# CustomVOCDataset was defined earlier in this notebook
+test_dataset = CustomVOCDataset(
+    root="/content/drive/MyDrive/sonar-object-detection/data/line2voc",
+    image_set="test",
+    transforms=ToTensor()
+)
+
+test_loader = DataLoader(
+    test_dataset,
+    batch_size=4,
+    shuffle=False,
+    collate_fn=lambda x: tuple(zip(*x))
+)
+
+# Evaluate the model using torchmetrics (Mean Average Precision - mAP)
+metric = MeanAveragePrecision()
+
+with torch.no_grad():
+    for imgs, targets in test_loader:
+        imgs = [img.to(device) for img in imgs]
+        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
+
+        outputs = model(imgs)
+
+        preds = []
+        targs = []
+
+        for o, t in zip(outputs, targets):
+            preds.append({
+                "boxes": o["boxes"].cpu(),
+                "scores": o["scores"].cpu(),
+                "labels": o["labels"].cpu()
+            })
+            targs.append({
+                "boxes": t["boxes"].cpu(),
+                "labels": t["labels"].cpu()
+            })
+
+        metric.update(preds, targs)
+
+# Display evaluation metrics
+results = metric.compute()
+
+print("\nDANN Evaluation Results on Target Domain:")
+for k, v in results.items():
+    print(f"{k}: {v:.4f}")
