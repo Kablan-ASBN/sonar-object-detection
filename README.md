@@ -144,9 +144,17 @@ Notebook: `notebooks/DANN_Pipeline_Setup(0.5).ipynb`
 
 **Visualizations:**
 
-* `outputs/histo_dann_0.5.png`: Detection histogram (score 0.5)
-* `outputs/boxplot_dann_0.5.png`: Boxplot of detections (score 0.5)
-* `outputs/table_dann_0.5.png`: Detection summary table (score 0.5)
+#### Detection Summary (Score Threshold 0.5)
+
+![Detection Histogram - Score 0.5](outputs/histo_dann_0.5.png)  
+*Histogram of detections per image with DANN threshold = 0.5*
+
+![Boxplot of Detections - Score 0.5](outputs/boxplot_dann_0.5.png)  
+*Boxplot showing distribution of detections per image*
+
+![Detection Table - Score 0.5](outputs/table_dann_0.5.png)  
+*Summary statistics: baseline vs. DANN at threshold 0.5*
+
 
 ---
 
@@ -173,9 +181,17 @@ Notebook: `notebooks/DANN_Pipeline_Setup(0.7).ipynb`
 
 **Visualizations:**
 
-* `outputs/histo_dann_0.7.png`: Detection histogram (score 0.7)
-* `outputs/boxplot_dann_0.7.png`: Boxplot of detections (score 0.7)
-* `outputs/table_dann_0.7.png`: Detection summary table (score 0.7)
+#### Detection Summary (Score Threshold 0.7)
+
+![Detection Histogram - Score 0.7](outputs/histo_dann_0.7.png)  
+*Histogram of detections per image with DANN threshold = 0.7*
+
+![Boxplot of Detections - Score 0.7](outputs/boxplot_dann_0.7.png)  
+*Boxplot showing distribution of detections per image*
+
+![Detection Table - Score 0.7](outputs/table_dann_0.7.png)  
+*Summary statistics: baseline vs. DANN at threshold 0.7*
+
 
 **Threshold Insight:**
 A score threshold of 0.7 was ultimately selected to reduce noisy detections. While it lowers recall slightly, it significantly improves detection focus and suppresses over-prediction noise. This aligns with the project's aim to build a robust detector that is practical for real-world sonar interpretation and minimizes false alarms.
