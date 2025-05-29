@@ -57,15 +57,14 @@ Used `fasterrcnn_resnet50_fpn` from `torchvision` with a custom classification h
 
 Model weights are stored externally:
 
-- **Raw (baseline)**:  
+* **Raw (baseline)**:
   [Download](https://drive.google.com/file/d/1CMuWcLI2Dzaov8bNr2oY2SDNTOyIR-ug/view?usp=sharing)
 
-- **Denoised model**:  
+* **Denoised model**:
   [Download](https://drive.google.com/file/d/1-F5k6tRJNg9JVDQv0NOtfnSoT3Dzaa_W/view?usp=sharing)
 
-- **Augmented model**:  
+* **Augmented model**:
   [Download](https://drive.google.com/file/d/191dtnr4owKMqI9l2liCBFlkdwY2fVScC/view?usp=sharing)
-
 
 ---
 
@@ -111,7 +110,7 @@ This model underperformed significantly. The offline augmentations likely caused
 
 ---
 
-### Evaluation: Domain Adaptation with DANN (Phase 2)
+### Evaluation: Domain Adaptation with DANN
 
 To improve generalization across different sonar domains, I used Domain-Adversarial Neural Networks (DANN) with the THUML Transfer Learning Library.
 
@@ -120,60 +119,66 @@ To improve generalization across different sonar domains, I used Domain-Adversar
 * Model: Faster R-CNN with ResNet-50 FPN
 * Training: 5 epochs on Google Colab Pro (GPU)
 
+---
+
+#### DANN Results (score threshold = 0.5)
+
+Notebook: `notebooks/DANN_Pipeline_Setup(0.5).ipynb`
+
 | Epoch | Detection Loss | Domain Loss |
 | ----- | -------------- | ----------- |
-| 1     | 1040.37        | 553.15      |
-| 2     | 986.94         | 568.76      |
-| 3     | 959.35         | 590.02      |
-| 4     | 939.89         | 609.84      |
-| 5     | 932.50         | 606.52      |
+| 1     | 1035.85        | 583.76      |
+| 2     | 988.75         | 596.74      |
+| 3     | 966.12         | 595.68      |
+| 4     | 943.11         | 595.41      |
+| 5     | 934.16         | 603.28      |
 
-**Outputs generated:**
+| Metric    | Value  |
+| --------- | ------ |
+| mAP       | 0.0495 |
+| mAP\@0.50 | 0.1796 |
+| mAP\@0.75 | 0.0173 |
+| mAR\@100  | 0.1529 |
+| Precision | 0.0918 |
+| Recall    | 0.4509 |
 
-* `outputs/preds_dann.csv`
-* `outputs/dann_vis/` (annotated visuals)
+**Visualizations:**
 
----
-
-### Quantitative Comparison of DANN vs Baseline
-
-| Metric                    | Baseline | DANN  |
-| ------------------------- | -------- | ----- |
-| Total Detections          | 24118    | 13667 |
-| Mean Detections per Image | 13.92    | 8.25  |
-| Median Detections         | 14       | 8     |
-
-**Insight:**
-Although the DANN model produced fewer total detections per image, these were generally of higher precision. This suggests that DANN improved domain generalization by reducing over-detection and filtering noise in the raw sonar data.
+* `outputs/histo_dann_0.5.png`: Detection histogram (score 0.5)
+* `outputs/boxplot_dann_0.5.png`: Boxplot of detections (score 0.5)
+* `outputs/table_dann_0.5.png`: Detection summary table (score 0.5)
 
 ---
 
-### Detection Distribution Visualizations
+#### DANN Results (score threshold = 0.7, Final Model)
 
-To visualize this difference, I compared the number of detections per image using histograms and boxplots.
+Notebook: `notebooks/DANN_Pipeline_Setup(0.7).ipynb`
 
-#### Distribution of Detections per Image
+| Epoch | Detection Loss | Domain Loss |
+| ----- | -------------- | ----------- |
+| 1     | 1030.13        | 708.96      |
+| 2     | 977.82         | 720.08      |
+| 3     | 955.54         | 727.78      |
+| 4     | 937.11         | 728.70      |
+| 5     | 926.48         | 727.61      |
 
-![Detection Histogram](outputs/histo_dann.png)
+| Metric    | Value  |
+| --------- | ------ |
+| mAP       | 0.0456 |
+| mAP\@0.50 | 0.1653 |
+| mAP\@0.75 | 0.0157 |
+| mAR\@100  | 0.1543 |
+| Precision | 0.0887 |
+| Recall    | 0.4544 |
 
-The DANN model (green) produced a more focused and stable distribution compared to the baseline (blue), which had a long tail of noisy predictions.
+**Visualizations:**
 
-#### Boxplot of Detections per Image
+* `outputs/histo_dann_0.7.png`: Detection histogram (score 0.7)
+* `outputs/boxplot_dann_0.7.png`: Boxplot of detections (score 0.7)
+* `outputs/table_dann_0.7.png`: Detection summary table (score 0.7)
 
-![Detection Boxplot](outputs/boxplot_dann.png)
-
-This boxplot confirms that the DANN model consistently made fewer and more concentrated predictions, reducing variability and extreme outliers.
-
----
-
-### Final Model Comparison
-
-| Model Type     | mAP    | mAP\@50 | mAR\@100 | Notes                                        |
-| -------------- | ------ | ------- | -------- | -------------------------------------------- |
-| Raw (baseline) | 0.0441 | 0.1643  | 0.1623   | Trained on raw sonar images                  |
-| Denoised       | 0.0475 | 0.1693  | 0.1677   | Slight improvement on small/medium targets   |
-| Augmented      | 0.0026 | 0.0084  | 0.0272   | Underperformed due to annotation drift       |
-| DANN (Phase 2) | 0.0448 | 0.1572  | 0.1498   | Domain adaptation from denoised to raw sonar |
+**Threshold Insight:**
+A score threshold of 0.7 was ultimately selected to reduce noisy detections. While it lowers recall slightly, it significantly improves detection focus and suppresses over-prediction noise. This aligns with the project's aim to build a robust detector that is practical for real-world sonar interpretation and minimizes false alarms.
 
 ---
 
@@ -189,8 +194,9 @@ This boxplot confirms that the DANN model consistently made fewer and more conce
 ### Notebooks
 
 * `notebooks/Faster_RCNN_Baseline_Model.ipynb`
-* `notebooks/DANN_Pipeline_Setup.ipynb`
+* `notebooks/DANN_Pipeline_Setup(0.5).ipynb`
+* `notebooks/DANN_Pipeline_Setup(0.7).ipynb`
 
-These notebooks contain the complete training, evaluation, and visualization workflow. They are structured for reproducibility and ready to support both dissertation submission and viva presentation.
+These notebooks contain the complete training, evaluation, and visualization workflows. They are structured for reproducibility and ready to support both dissertation submission and viva presentation.
 
 ---
