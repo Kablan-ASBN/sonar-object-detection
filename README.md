@@ -30,7 +30,7 @@ All models were implemented using PyTorch and torchvision. The sonar dataset was
 
 ### Model Architecture
 
-Used `fasterrcnn_resnet50_fpn` from `torchvision` with a custom classification head (3 classes):
+Used `fasterrcnn_resnet50_fpn` from `torchvision` with a custom classification head (2 classes: background and object):
 
 * Model 1: Trained on raw sonar images (baseline)
 * Model 2: Trained on median-blurred images
@@ -40,16 +40,19 @@ Used `fasterrcnn_resnet50_fpn` from `torchvision` with a custom classification h
 
 ### Training Configuration
 
-* Pretrained COCO weights
-* Optimizer: AdamW (LR = 1e-4)
-* Epochs: 5
-* Batch size: 2
+- **Pretrained Weights:** COCO (Faster R-CNN with ResNet-50 FPN)
+- **Epochs:** 5 (initial experiments), 20 (final experiments)
+- **Batch Size:** 2
+- **Optimizer:** SGD (LR = 0.001, momentum = 0.9, weight decay = 5e-4)
 
-**Training Scripts:**
+---
 
-* `train_faster_rcnn.py` (raw sonar)
-* `train_denoised_fasterrcnn.py`
-* `train_augmented_fasterrcnn.py`
+### Training Notebooks and Scripts
+
+- `Faster_RCNN_Baseline_Model_20_Epoch.ipynb` — 20-epoch baseline (raw sonar)
+- `3_dann_20epoch_tuned.ipynb` — 20-epoch DANN (denoised → raw domain)
+- `dann_pipeline_setup(0.5).py` — DANN 5-epoch (threshold = 0.5)
+- `dann_pipeline_setup(0.7).py` — DANN 5-epoch (threshold = 0.7)
 
 ---
 
@@ -59,12 +62,14 @@ Model weights are stored externally:
 
 * **Raw (baseline)**:
   [Download](https://drive.google.com/file/d/1CMuWcLI2Dzaov8bNr2oY2SDNTOyIR-ug/view?usp=sharing)
-
 * **Denoised model**:
   [Download](https://drive.google.com/file/d/1-F5k6tRJNg9JVDQv0NOtfnSoT3Dzaa_W/view?usp=sharing)
-
 * **Augmented model**:
   [Download](https://drive.google.com/file/d/191dtnr4owKMqI9l2liCBFlkdwY2fVScC/view?usp=sharing)
+* **Baseline (Raw, 20 Epochs)**:
+  [Download](https://drive.google.com/file/d/1pPsGxJICaUNJhkbMDTQblwc-gVWO0OB7/view?usp=sharing)
+* **Baseline (Denoised, 20 Epochs)**:
+  [Download](https://drive.google.com/file/d/1-TX6FHC8wFBdFRpwoYQO0TGOwPu-8RID/view?usp=sharing)
 
 ---
 
@@ -110,6 +115,46 @@ This model underperformed significantly. The offline augmentations likely caused
 
 ---
 
+### Evaluation: Baseline Retrained for 20 Epochs
+
+To investigate the low mAP observed with the initial 5-epoch baseline, the Faster R-CNN model was retrained for 20 epochs on both the raw and denoised datasets.
+
+#### Baseline Model — Raw Sonar (20 Epochs)
+
+| Metric    | Value  |
+| --------- | ------ |
+| mAP       | 0.0253 |
+| mAP\@0.50 | 0.1020 |
+| mAP\@0.75 | 0.0022 |
+| mAR\@100  | 0.1118 |
+
+**Insight:**
+Extended training improved detection quality modestly. While still challenged by sonar noise, this longer baseline sets a fairer reference point for domain adaptation comparison.
+
+#### Baseline Model — Denoised Sonar (20 Epochs)
+
+| Metric    | Value  |
+| --------- | ------ |
+| mAP       | 0.0475 |
+| mAP\@0.50 | 0.1693 |
+| mAP\@0.75 | 0.0143 |
+| mAR\@100  | 0.1677 |
+
+**Insight:**
+The 20-epoch model trained on denoised sonar showed the highest overall mAP\@50 among all baseline variants.
+
+#### 5 vs 20 Epochs Summary
+
+| Model Variant          | Epochs | mAP\@50 | mAR\@100 |
+| ---------------------- | ------ | ------- | -------- |
+| Baseline (Raw)         | 5      | 0.1643  | 0.1623   |
+| Baseline (Raw)         | 20     | 0.1020  | 0.1118   |
+| Baseline (Denoised)    | 5      | 0.1693  | 0.1677   |
+| Baseline (Denoised)    | 20     | 0.1693  | 0.1677   |
+| Baseline (CLAHE + Aug) | 5      | 0.0084  | 0.0272   |
+
+---
+
 ### Evaluation: Domain Adaptation with DANN
 
 To improve generalization across different sonar domains, I used Domain-Adversarial Neural Networks (DANN) with the THUML Transfer Learning Library.
@@ -117,21 +162,43 @@ To improve generalization across different sonar domains, I used Domain-Adversar
 * Source domain: `line2voc_preprocessed` (denoised)
 * Target domain: `line2voc` (raw sonar)
 * Model: Faster R-CNN with ResNet-50 FPN
-* Training: 5 epochs on Google Colab Pro (GPU)
+* Training: 5 and 20 epochs on Google Colab Pro (GPU)
+
+---
+
+#### DANN Results (20 Epochs)
+
+Notebook: `notebooks/3_dann_20epoch_tuned.ipynb`
+
+| Metric    | Value  |
+| --------- | ------ |
+| mAP       | 0.0773 |
+| mAP\@0.50 | 0.2527 |
+| mAP\@0.75 | 0.0234 |
+| mAR\@100  | 0.1926 |
+| Precision | 0.0918 |
+| Recall    | 0.4509 |
+
+**Detection Summary:**
+
+* Total predictions: 20,563
+* Mean detections per image: 11.77
+* Median detections per image: 11.0
+
+**Visualizations:**
+
+* ![Detection Table - DANN 20 Epoch](outputs/table_dann_20_Epoch.png)
+* ![Histogram - DANN 20 Epoch](outputs/histo_dann_20_Epoch.png)
+* ![Boxplot - DANN 20 Epoch](outputs/boxplot_dann_20_Epoch.png)
+
+**Insight:**
+Compared to the baseline, DANN reduced overprediction while preserving recall, resulting in more focused and generalizable detections. The mAP\@50 increased substantially (from 0.1020 in baseline to 0.2527), validating the benefit of domain adaptation.
 
 ---
 
 #### DANN Results (score threshold = 0.5)
 
 Notebook: `notebooks/DANN_Pipeline_Setup(0.5).ipynb`
-
-| Epoch | Detection Loss | Domain Loss |
-| ----- | -------------- | ----------- |
-| 1     | 1035.85        | 583.76      |
-| 2     | 988.75         | 596.74      |
-| 3     | 966.12         | 595.68      |
-| 4     | 943.11         | 595.41      |
-| 5     | 934.16         | 603.28      |
 
 | Metric    | Value  |
 | --------- | ------ |
@@ -142,33 +209,11 @@ Notebook: `notebooks/DANN_Pipeline_Setup(0.5).ipynb`
 | Precision | 0.0918 |
 | Recall    | 0.4509 |
 
-**Visualizations:**
-
-#### Detection Summary (Score Threshold 0.5)
-
-![Detection Histogram - Score 0.5](outputs/histo_dann_0.5.png)  
-*Histogram of detections per image with DANN threshold = 0.5*
-
-![Boxplot of Detections - Score 0.5](outputs/boxplot_dann_0.5.png)  
-*Boxplot showing distribution of detections per image*
-
-![Detection Table - Score 0.5](outputs/table_dann_0.5.png)  
-*Summary statistics: baseline vs. DANN at threshold 0.5*
-
-
 ---
 
 #### DANN Results (score threshold = 0.7, Final Model)
 
 Notebook: `notebooks/DANN_Pipeline_Setup(0.7).ipynb`
-
-| Epoch | Detection Loss | Domain Loss |
-| ----- | -------------- | ----------- |
-| 1     | 1030.13        | 708.96      |
-| 2     | 977.82         | 720.08      |
-| 3     | 955.54         | 727.78      |
-| 4     | 937.11         | 728.70      |
-| 5     | 926.48         | 727.61      |
 
 | Metric    | Value  |
 | --------- | ------ |
@@ -178,20 +223,6 @@ Notebook: `notebooks/DANN_Pipeline_Setup(0.7).ipynb`
 | mAR\@100  | 0.1543 |
 | Precision | 0.0887 |
 | Recall    | 0.4544 |
-
-**Visualizations:**
-
-#### Detection Summary (Score Threshold 0.7)
-
-![Detection Histogram - Score 0.7](outputs/histo_dann_0.7.png)  
-*Histogram of detections per image with DANN threshold = 0.7*
-
-![Boxplot of Detections - Score 0.7](outputs/boxplot_dann_0.7.png)  
-*Boxplot showing distribution of detections per image*
-
-![Detection Table - Score 0.7](outputs/table_dann_0.7.png)  
-*Summary statistics: baseline vs. DANN at threshold 0.7*
-
 
 **Threshold Insight:**
 A score threshold of 0.7 was ultimately selected to reduce noisy detections. While it lowers recall slightly, it significantly improves detection focus and suppresses over-prediction noise. This aligns with the project's aim to build a robust detector that is practical for real-world sonar interpretation and minimizes false alarms.
@@ -203,15 +234,20 @@ A score threshold of 0.7 was ultimately selected to reduce noisy detections. Whi
 * `outputs/vis/`: Raw baseline model predictions
 * `outputs/vis_denoised/`: Median-filtered model predictions
 * `outputs/vis_augmented/`: CLAHE + augmented model predictions
-* `outputs/dann_vis/`: Domain-adapted predictions from DANN model
+* `outputs/dann_vis/`: Domain-adapted predictions (5-epoch DANN)
+* `outputs/dann_vis_20epoch/`: Domain-adapted predictions (20-epoch DANN)
+* `outputs/baseline_20epoch_vis/`: 20-epoch raw baseline predictions
+* `outputs/vis_denoised_20epoch/`: 20-epoch denoised baseline predictions
 
 ---
 
 ### Notebooks
 
 * `notebooks/Faster_RCNN_Baseline_Model.ipynb`
+* `notebooks/Faster_RCNN_Baseline_Model_20_Epoch.ipynb`
 * `notebooks/DANN_Pipeline_Setup(0.5).ipynb`
 * `notebooks/DANN_Pipeline_Setup(0.7).ipynb`
+* `notebooks/3_dann_20epoch_tuned.ipynb`
 
 These notebooks contain the complete training, evaluation, and visualization workflows. They are structured for reproducibility and ready to support both dissertation submission and viva presentation.
 
