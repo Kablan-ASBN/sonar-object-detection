@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <annotation>
   <folder>images</folder>
   <filename>Line 2_CNav_4500_53000_5000_53500.jpg</filename>
@@ -8,14 +7,14 @@
     <depth>3</depth>
   </size>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>57</xmin>
+      <xmin>288</xmin>
       <ymin>59</ymin>
-      <xmax>212</xmax>
+      <xmax>443</xmax>
       <ymax>66</ymax>
     </bndbox>
   </object>
@@ -25,21 +24,21 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>21</xmin>
+      <xmin>406</xmin>
       <ymin>59</ymin>
-      <xmax>94</xmax>
+      <xmax>479</xmax>
       <ymax>66</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>79</xmin>
+      <xmin>343</xmin>
       <ymin>69</ymin>
-      <xmax>157</xmax>
+      <xmax>421</xmax>
       <ymax>72</ymax>
     </bndbox>
   </object>
@@ -49,9 +48,9 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>63</xmin>
+      <xmin>406</xmin>
       <ymin>69</ymin>
-      <xmax>94</xmax>
+      <xmax>437</xmax>
       <ymax>72</ymax>
     </bndbox>
   </object>

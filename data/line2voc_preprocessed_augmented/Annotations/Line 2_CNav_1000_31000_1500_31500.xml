@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <annotation>
   <folder>images</folder>
   <filename>Line 2_CNav_1000_31000_1500_31500.jpg</filename>
@@ -8,14 +7,14 @@
     <depth>3</depth>
   </size>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>387</xmin>
+      <xmin>0</xmin>
       <ymin>140</ymin>
-      <xmax>500</xmax>
+      <xmax>113</xmax>
       <ymax>157</ymax>
     </bndbox>
   </object>
@@ -25,21 +24,21 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>350</xmin>
+      <xmin>77</xmin>
       <ymin>140</ymin>
-      <xmax>423</xmax>
+      <xmax>150</xmax>
       <ymax>157</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>430</xmin>
+      <xmin>0</xmin>
       <ymin>150</ymin>
-      <xmax>500</xmax>
+      <xmax>70</xmax>
       <ymax>163</ymax>
     </bndbox>
   </object>
@@ -49,21 +48,21 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>398</xmin>
+      <xmin>39</xmin>
       <ymin>150</ymin>
-      <xmax>461</xmax>
+      <xmax>102</xmax>
       <ymax>163</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>456</xmin>
+      <xmin>0</xmin>
       <ymin>345</ymin>
-      <xmax>500</xmax>
+      <xmax>44</xmax>
       <ymax>358</ymax>
     </bndbox>
   </object>
@@ -73,21 +72,21 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>420</xmin>
+      <xmin>7</xmin>
       <ymin>345</ymin>
-      <xmax>493</xmax>
+      <xmax>80</xmax>
       <ymax>358</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>273</xmin>
+      <xmin>85</xmin>
       <ymin>9</ymin>
-      <xmax>415</xmax>
+      <xmax>227</xmax>
       <ymax>18</ymax>
     </bndbox>
   </object>
@@ -97,9 +96,9 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>231</xmin>
+      <xmin>186</xmin>
       <ymin>9</ymin>
-      <xmax>314</xmax>
+      <xmax>269</xmax>
       <ymax>18</ymax>
     </bndbox>
   </object>
@@ -109,21 +108,21 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>448</xmin>
+      <xmin>0</xmin>
       <ymin>242</ymin>
-      <xmax>500</xmax>
+      <xmax>52</xmax>
       <ymax>249</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>446</xmin>
+      <xmin>0</xmin>
       <ymin>103</ymin>
-      <xmax>500</xmax>
+      <xmax>54</xmax>
       <ymax>108</ymax>
     </bndbox>
   </object>
@@ -133,9 +132,9 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>426</xmin>
+      <xmin>33</xmin>
       <ymin>103</ymin>
-      <xmax>467</xmax>
+      <xmax>74</xmax>
       <ymax>108</ymax>
     </bndbox>
   </object>
@@ -145,9 +144,9 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>470</xmin>
+      <xmin>0</xmin>
       <ymin>133</ymin>
-      <xmax>500</xmax>
+      <xmax>30</xmax>
       <ymax>138</ymax>
     </bndbox>
   </object>

@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <annotation>
   <folder>images</folder>
   <filename>Line 2_CNav_4500_23000_5000_23500.jpg</filename>
@@ -8,38 +7,38 @@
     <depth>3</depth>
   </size>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>0</xmin>
+      <xmin>430</xmin>
       <ymin>101</ymin>
-      <xmax>70</xmax>
+      <xmax>500</xmax>
       <ymax>112</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>0</xmin>
+      <xmin>463</xmin>
       <ymin>107</ymin>
-      <xmax>37</xmax>
+      <xmax>500</xmax>
       <ymax>118</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>0</xmin>
+      <xmin>309</xmin>
       <ymin>326</ymin>
-      <xmax>191</xmax>
+      <xmax>500</xmax>
       <ymax>335</ymax>
     </bndbox>
   </object>
@@ -49,21 +48,21 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>0</xmin>
+      <xmin>477</xmin>
       <ymin>326</ymin>
-      <xmax>23</xmax>
+      <xmax>500</xmax>
       <ymax>335</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>112</xmin>
+      <xmin>239</xmin>
       <ymin>362</ymin>
-      <xmax>261</xmax>
+      <xmax>388</xmax>
       <ymax>369</ymax>
     </bndbox>
   </object>
@@ -73,9 +72,9 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>75</xmin>
+      <xmin>352</xmin>
       <ymin>362</ymin>
-      <xmax>148</xmax>
+      <xmax>425</xmax>
       <ymax>369</ymax>
     </bndbox>
   </object>

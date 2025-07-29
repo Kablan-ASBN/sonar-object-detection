@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <annotation>
   <folder>images</folder>
   <filename>Line 2_CNav_1000_35500_1500_36000.jpg</filename>
@@ -8,14 +7,14 @@
     <depth>3</depth>
   </size>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>61</xmin>
+      <xmin>224</xmin>
       <ymin>137</ymin>
-      <xmax>276</xmax>
+      <xmax>439</xmax>
       <ymax>160</ymax>
     </bndbox>
   </object>
@@ -25,33 +24,33 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>20</xmin>
+      <xmin>397</xmin>
       <ymin>137</ymin>
-      <xmax>103</xmax>
+      <xmax>480</xmax>
       <ymax>160</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>0</xmin>
+      <xmin>476</xmin>
       <ymin>415</ymin>
-      <xmax>24</xmax>
+      <xmax>500</xmax>
       <ymax>428</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>295</xmin>
+      <xmin>110</xmin>
       <ymin>364</ymin>
-      <xmax>390</xmax>
+      <xmax>205</xmax>
       <ymax>369</ymax>
     </bndbox>
   </object>
@@ -61,21 +60,21 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>263</xmin>
+      <xmin>174</xmin>
       <ymin>364</ymin>
-      <xmax>326</xmax>
+      <xmax>237</xmax>
       <ymax>369</ymax>
     </bndbox>
   </object>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>35</xmin>
+      <xmin>332</xmin>
       <ymin>378</ymin>
-      <xmax>168</xmax>
+      <xmax>465</xmax>
       <ymax>383</ymax>
     </bndbox>
   </object>
@@ -85,9 +84,9 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>3</xmin>
+      <xmin>434</xmin>
       <ymin>378</ymin>
-      <xmax>66</xmax>
+      <xmax>497</xmax>
       <ymax>383</ymax>
     </bndbox>
   </object>

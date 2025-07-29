@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <annotation>
   <folder>images</folder>
   <filename>Line 2_CNav_3000_22000_3500_22500.jpg</filename>
@@ -8,14 +7,14 @@
     <depth>3</depth>
   </size>
   <object>
-    <name>object_1</name>
+    <name>shadow</name>
     <pose>Unspecified</pose>
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>257</xmin>
+      <xmin>180</xmin>
       <ymin>363</ymin>
-      <xmax>320</xmax>
+      <xmax>243</xmax>
       <ymax>366</ymax>
     </bndbox>
   </object>
@@ -25,9 +24,9 @@
     <truncated>0</truncated>
     <difficult>0</difficult>
     <bndbox>
-      <xmin>241</xmin>
+      <xmin>228</xmin>
       <ymin>363</ymin>
-      <xmax>272</xmax>
+      <xmax>259</xmax>
       <ymax>366</ymax>
     </bndbox>
   </object>
