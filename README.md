@@ -356,22 +356,43 @@ All evaluations were performed in inference mode using **mixed-precision (AMP)**
 
 ---
 
-### Visualizations and Qualitative Results
+### Qualitative Predictions (Bounding Box Visualizations)
 
-#### Quantitative Plots:
-- `outputs/detection_per_image_20ep_mod.png`: Boxplot with strip overlay of detection counts per image.
-- `outputs/distri_of_detect_20_ep_mod.png`: Histogram of per-image detection distributions across all models.
+Each model was evaluated on raw sonar images and produced bounding box predictions for `object` and `shadow` classes. Below are selected examples from the final test set, visualized directly from each model’s output:
 
-#### Qualitative Prediction Directories:
-Each directory contains 5 annotated raw sonar images with predictions visualized:
+#### Baseline Models
 
-- `outputs/vis_raw_20epoch/`
-- `outputs/vis_denoised_20epoch/`
-- `outputs/vis_claheaug_20epoch/`
-- `outputs/vis_dann_20epoch/`
+**Raw Input (No Preprocessing)**  
+Predictions by the 20-epoch model trained on raw sonar images.  
+![Raw Baseline Example](outputs/vis_raw_20epoch/sample1.png)
+
+**Denoised Input (Median Filtered)**  
+Predictions by the 20-epoch denoised baseline model.  
+![Denoised Baseline Example](outputs/vis_denoised_20epoch/sample1.png)
+
+**CLAHE + Augmented Input**  
+Predictions by the 20-epoch model trained on CLAHE-processed and augmented images.  
+![Augmented Baseline Example](outputs/vis_claheaug_20epoch/sample1.png)
+
+#### Domain Adaptation Models
+
+**DANN (Domain-Adversarial Neural Network)**  
+Predictions after domain adaptation from denoised source to raw target domain.  
+![DANN Example](outputs/vis_dann_20epoch/sample1.png)
+
+**DCCAN (Hybrid Adaptation: DANN + CDAN)**  
+Predictions by the hybrid model combining global and conditional alignment.  
+![DCCAN Example](outputs/vis_dccan_20epoch/sample1.png)
+
+> Each image shows bounding boxes for both `object` (typically bright reflections) and `shadow` (elongated acoustic shadows). These help visualize domain shift effects and adaptation performance across models.
+
+Additional visualizations can be found in the full output folders:
+
+- `outputs/vis_raw_20epoch/`  
+- `outputs/vis_denoised_20epoch/`  
+- `outputs/vis_claheaug_20epoch/`  
+- `outputs/vis_dann_20epoch/`  
 - `outputs/vis_dccan_20epoch/`
-
-These examples highlight the domain gap, shadow-object ambiguity, and model-specific sensitivity patterns.
 
 ---
 
