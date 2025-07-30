@@ -356,6 +356,24 @@ All evaluations were performed in inference mode using **mixed-precision (AMP)**
 
 ---
 
+### Detection Distribution Visualizations
+
+**Boxplot of Detections per Image**  
+This figure compares detection behavior across all models using a boxplot with individual sample overlays.  
+![Detection Counts per Image](outputs/detection_per_image_20ep_mod.png)  
+- **Raw** and **Denoised** baselines have consistent medians (~19 detections/image).  
+- **CLAHE+Aug** shows the widest spread, indicating over-detection.  
+- **DANN** predicts the fewest boxes per image, with low variance.  
+- **DCCAN** balances between DANN and the baselines, suggesting improved generalization.
+
+**Histogram of Detection Frequency**  
+This histogram shows how often each detection count occurred across test images.  
+![Detection Histogram](outputs/distri_of_detect_20_ep_mod.png)  
+- **DANN** is left-skewed (conservative).  
+- **CLAHE+Aug** is right-skewed (aggressive).  
+- **DCCAN** has a moderate spread—fewer false positives, better recall than DANN.
+
+> Together, these plots illustrate how domain adaptation strategies influence detection quantity and distribution, providing insight beyond traditional metrics.
 ### Qualitative Predictions (Bounding Box Visualizations)
 
 Each model was evaluated on raw sonar images and produced bounding box predictions for `object` and `shadow` classes. Below are selected examples from the final test set, visualized directly from each model’s output:
@@ -364,25 +382,25 @@ Each model was evaluated on raw sonar images and produced bounding box predictio
 
 **Raw Input (No Preprocessing)**  
 Predictions by the 20-epoch model trained on raw sonar images.  
-![Raw Baseline Example](outputs/vis_raw_20epoch/sample1.png)
+![Raw Baseline Example](outputs/baseline_20epoch_vis/Line%202_CNav_1000_1500_1500_2000.jpg)
 
 **Denoised Input (Median Filtered)**  
 Predictions by the 20-epoch denoised baseline model.  
-![Denoised Baseline Example](outputs/vis_denoised_20epoch/sample1.png)
+![Denoised Baseline Example](outputs/vis_denoised_20epoch/Line%202_CNav_1000_1500_1500_2000.jpg)
 
 **CLAHE + Augmented Input**  
 Predictions by the 20-epoch model trained on CLAHE-processed and augmented images.  
-![Augmented Baseline Example](outputs/vis_claheaug_20epoch/sample1.png)
+![Augmented Baseline Example](outputs/vis_claheaug_20epoch/Line%202_CNav_1000_1500_1500_2000.jpg)
 
 #### Domain Adaptation Models
 
 **DANN (Domain-Adversarial Neural Network)**  
 Predictions after domain adaptation from denoised source to raw target domain.  
-![DANN Example](outputs/vis_dann_20epoch/sample1.png)
+![DANN Example](outputs/vis_dann_20epoch/Line%202_CNav_1000_25000_1500_25500.jpg)
 
 **DCCAN (Hybrid Adaptation: DANN + CDAN)**  
 Predictions by the hybrid model combining global and conditional alignment.  
-![DCCAN Example](outputs/vis_dccan_20epoch/sample1.png)
+![DCCAN Example](outputs/vis_dccan_20epoch/Line%202_CNav_1000_25000_1500_25500.jpg)
 
 > Each image shows bounding boxes for both `object` (typically bright reflections) and `shadow` (elongated acoustic shadows). These help visualize domain shift effects and adaptation performance across models.
 
