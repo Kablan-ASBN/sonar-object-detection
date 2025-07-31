@@ -79,12 +79,14 @@ These splits were used consistently across all training and evaluation pipelines
 
 ## Model Architecture
 
-This project implements object detection using **Faster R-CNN** with a **ResNet-50 FPN** backbone. The architecture was selected for its robustness in handling small-scale features and its strong performance in a wide range of object detection tasks.
+This project implements object detection using **Faster R-CNN** with a **ResNet-50 FPN** backbone.  
+The architecture was selected for its robustness in handling small-scale features and its strong performance across a wide range of object detection tasks.
 
-The model predicts three classes:
-- **0** — Background (implicit)
-- **1** — Shadow
-- **2** — Object
+The classification head was modified to support **three classes**:
+
+- **0 — Background** (implicit; handled internally by Faster R-CNN)
+- **1 — Object** (physical structure on the seafloor)
+- **2 — Shadow** (acoustic projection cast by the object)
 
 ---
 
@@ -260,7 +262,7 @@ These models were trained to test preprocessing effects and familiarize with Fas
 | CLAHE + Augmented     | [Download](https://drive.google.com/file/d/1i3v588jMBBOeOE-RIPZ_CSN7DF_1czOu/view?usp=drive_link)  
 
 - Input format: Pascal VOC  
-- Classes: background (implicit), shadow (1), object (2)  
+- Classes: background (implicit), object (1), shadow (2) 
 - AMP: Disabled  
 - Batch size: **4**  
 - Optimizer: AdamW  
