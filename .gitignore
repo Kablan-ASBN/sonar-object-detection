@@ -1,29 +1,54 @@
+# ================================
 # Python build and runtime artifacts
+# ================================
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.log
 .venv/
 .env
 
-# IDE and editor files
+# ================================
+# IDE and Editor files
+# ================================
 .vscode/
 *.code-workspace
 
-# System-generated files
+# ================================
+# OS-generated files
+# ================================
 .DS_Store
 Thumbs.db
 
+# ================================
 # Jupyter internals
+# ================================
 .ipynb_checkpoints/
 
-# Output folders - keep .csv files, skip visualizations
-outputs/vis/
-outputs/vis_denoised/
+# ================================
+# Outputs: Keep evaluation visualizations
+# ================================
+# Ignore unused or intermediate vis folders
 outputs/vis_augmented/
 outputs/dann_vis/
 
-# Model checkpoints - not pushing .pth files (too large for GitHub)
+# Keep only final visualizations (as referenced in README)
+!outputs/detection_per_image_20ep_mod.png
+!outputs/distri_of_detect_20_ep_mod.png
+!outputs/vis_raw_20epoch/
+!outputs/vis_denoised_20epoch/
+!outputs/vis_claheaug_20epoch/
+!outputs/vis_dann_20epoch/
+!outputs/vis_dccan_20epoch/
+
+# ================================
+# Model Checkpoints (Too large for GitHub) can be shared with Seabed.AI and my supervisor if necessary
+# ================================
 checkpoints/
 *.pth
 
-# Optional: raw datasets can be ignored if stored externally
-# data/
+# ================================
+# Datasets (Handled externally) can be shared with Seabed.AI and my supervisor if necessary
+# ================================
+data/
