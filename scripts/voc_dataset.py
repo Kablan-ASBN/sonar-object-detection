@@ -104,9 +104,11 @@ class VOCDataset(Dataset):
 
         # Handle empty annotation case with dummy values
         if not boxes:
-            boxes = [[0, 0, 1, 1]]
-            labels = [0]
-
+            return {
+                "boxes": torch.zeros((0, 4), dtype=torch.float32),
+                "labels": torch.zeros((0,), dtype=torch.int64)
+            }
+            
         return {
             "boxes": torch.tensor(boxes, dtype=torch.float32),
             "labels": torch.tensor(labels, dtype=torch.int64)
