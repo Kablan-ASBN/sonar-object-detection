@@ -1,14 +1,15 @@
 # Sonar Object Detection with Transfer Learning and Domain Adaptation
 
-This repository implements a full machine learning pipeline for **object detection in sidescan sonar imagery**.  
-It explores how preprocessing, transfer learning, and domain adaptation can improve generalization under severe noise and domain shift, where training and deployment data differ significantly.
+**Context**
+This project was completed as part of an industry MSc placement with Seabed.AI and reflects applied work carried out in a production-oriented engineering environment. It is included here to demonstrate experience with **real-world data pipelines, model evaluation under domain shift, and performance trade-offs in noisy operational data**.
 
-The system integrates:
+The core challenge addressed was improving object detection robustness when training and deployment data differ significantly due to environmental noise, sensor variation, and operational constraints.
 
-- **Data engineering**: YOLO-to-VOC conversion, class remapping, stratified dataset splits  
-- **Detection models**: Faster R-CNN with ResNet-50 FPN backbone  
-- **Domain adaptation**: adversarial approaches (DANN, DCCAN) to reduce reliance on target labels  
-- **Evaluation**: COCO-style metrics and Free-response ROC (FROC) curves  
+The emphasis of this work is on:
+- data preparation and validation under imperfect conditions
+- evaluation discipline and precision–recall trade-offs
+- robustness and stability rather than benchmark performance
+  
 
 **Author:** Gomis Kablan Assebian
 
