@@ -1,15 +1,17 @@
 # Sonar Object Detection with Transfer Learning and Domain Adaptation
 
-**Context**
-This project was completed as part of an industry MSc placement with Seabed.AI and reflects applied work carried out in a production-oriented engineering environment. It is included here to demonstrate experience with **real-world data pipelines, model evaluation under domain shift, and performance trade-offs in noisy operational data**.
+## Context
+This project was completed as part of an industry MSc placement with Seabed.AI and reflects applied work carried out in a production-oriented engineering environment. It is included here to demonstrate experience with real-world data pipelines, model evaluation under domain shift, and performance trade-offs in noisy operational data.
 
+This repository documents a subset of the technical work from my placement; day-to-day responsibilities also included data validation, ETL support, dashboarding, and cross-team reporting, which are not fully represented here due to NDA and scope.
+
+## Problem Framing
 The core challenge addressed was improving object detection robustness when training and deployment data differ significantly due to environmental noise, sensor variation, and operational constraints.
 
-The emphasis of this work is on:
-- data preparation and validation under imperfect conditions
-- evaluation discipline and precision–recall trade-offs
-- robustness and stability rather than benchmark performance
-  
+## Emphasis
+- Data preparation and validation under imperfect conditions  
+- Evaluation discipline and precision–recall trade-offs  
+- Robustness and stability rather than benchmark performance  
 
 **Author:** Gomis Kablan Assebian
 
