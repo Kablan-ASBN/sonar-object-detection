@@ -25,12 +25,6 @@ drive.mount('/content/drive')
 # Commented out IPython magic to ensure Python compatibility.
 # SETUP: CLONE REPO & INSTALL DOMAIN ADAPTATION LIBRARIES
 
-# Cloning private GitHub
-import os
-os.environ["GITHUB_TOKEN"] = "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"
-!git clone https://${GITHUB_TOKEN}@github.com/Kablan-ASBN/sonar-object-detection.git
-# %cd sonar-object-detection
-
 # Install required dependencies
 !pip install -r requirements.txt
 
