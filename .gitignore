@@ -51,7 +51,9 @@ checkpoints/
 # ================================
 # Datasets (Handled externally) can be shared with Seabed.AI and my supervisor if necessary
 # ================================
-data/
+# Anchored: an unanchored `data/` also matched src/sonar/data/, which silently
+# kept six package modules out of the repository.
+/data/
 
 # ================================
 # Local environments and run artifacts
