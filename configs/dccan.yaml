@@ -14,7 +14,7 @@ data:
   target_root: data/line2voc                # unlabelled, raw
   train_split: train
   val_root: data/line2voc
-  val_split: test
+  val_split: val
   hflip: 0.5
 
 adaptation:

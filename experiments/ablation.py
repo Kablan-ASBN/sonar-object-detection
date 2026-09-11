@@ -66,8 +66,7 @@ def subset(root: Path, split: str, limit: int | None, seed: int = 0) -> list[str
 
 
 def score(model, root: Path, split: str, ids, args) -> dict[str, dict[str, float]]:
-    gt = GroundTruth.load(root, split)
-    gt = gt if ids is None else GroundTruth.load(root, split)
+    gt = GroundTruth.load(root, split, ids=ids)
     dataset = VOCDetection(root, split, ids=ids)
     preds = predict_dataset(model, dataset, device=args.device, cfg=RAW)
 
