@@ -52,7 +52,9 @@ def load_csv(path: Path, keep: set[str]) -> dict[str, dict]:
             box = [float(record[k]) for k in ("xmin", "ymin", "xmax", "ymax")]
             if box[2] <= box[0] or box[3] <= box[1]:
                 continue
-            rows.setdefault(image_id, []).append((float(record["score"]), int(record["class_id"]), box))
+            rows.setdefault(image_id, []).append(
+                (float(record["score"]), int(record["class_id"]), box)
+            )
 
     out = {}
     for image_id, entries in rows.items():
@@ -126,7 +128,10 @@ def finding_7() -> None:
         ids = archived_ids("raw", split)
         gt = GroundTruth.load(ROOTS["raw"], split, ids=ids)
         print(f"\nraw/{split}, {len(gt)} images, {gt.n_boxes()} boxes")
-        print(f"{'model':20s} {'AP50':>8s} {'reported':>9s} {'delta':>8s} {'images':>7s} {'min score':>10s}")
+        print(
+            f"{'model':20s} {'AP50':>8s} {'reported':>9s} {'delta':>8s} "
+            f"{'images':>7s} {'min score':>10s}"
+        )
         for name, (filename, reported) in REPORTED.items():
             path = REPO / "outputs" / filename
             if not path.is_file():

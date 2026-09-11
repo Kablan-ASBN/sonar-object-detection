@@ -47,8 +47,9 @@ $ echo $?
 1
 ```
 
-The splits had been generated separately for each dataset root by an unseeded `random.shuffle`, so
-the roots disagreed about what was held out. DANN and DCCAN take the denoised root as their
+That is the 2025 state, archived under `docs/evidence/original_splits/`. The splits now in `data/`
+are regenerated and `make audit` passes. The originals had been generated separately for each
+dataset root by an unseeded `random.shuffle`, so the roots disagreed about what was held out. DANN and DCCAN take the denoised root as their
 *labelled* source domain and were evaluated on raw validation.
 
 The test split survived: all three roots carry the same 180 ids and no training split touches it.

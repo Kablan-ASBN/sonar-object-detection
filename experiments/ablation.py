@@ -1,9 +1,9 @@
 """Measure the three defects from docs/AUDIT.md that each favoured the proposed model.
 
-One training run on the denoised source domain answers two of them at once, because the raw
-validation split shares 219 of its 242 ids with that training set while the raw test split shares
-none. Training twice, once with the original image-only flip and once with the box-aware flip,
-answers the third.
+One training run on the denoised source domain answers two of them at once: under the 2025 splits,
+archived in docs/evidence/original_splits/ and used here on purpose, the raw validation split
+shares 219 of its 242 ids with that training set while the raw test split shares none. Training
+twice, once with the original image-only flip and once with the box-aware flip, answers the third.
 
   leak inflation  = AP50(raw/val, 90% seen) - AP50(raw/test, 0% seen)
   flip cost       = AP50(box-aware) - AP50(image-only), both on raw/test
@@ -56,8 +56,21 @@ class BrokenFlipTransform:
         return tensor, dict(target)
 
 
+ARCHIVE = REPO / "docs" / "evidence" / "original_splits"
+
+
+def archived_ids(root: Path, split: str) -> list[str]:
+    """The 2025 split for `root`, read from the archive rather than from data/.
+
+    The live splits under data/ have been regenerated and no longer leak, so the leaky
+    condition this experiment prices has to come from the archived files.
+    """
+    path = ARCHIVE / root.name / f"{split}.txt"
+    return [line.strip() for line in path.read_text().splitlines() if line.strip()]
+
+
 def subset(root: Path, split: str, limit: int | None, seed: int = 0) -> list[str]:
-    ids = VOCDetection(root, split).ids
+    ids = archived_ids(root, split)
     if limit is None or limit >= len(ids):
         return ids
     generator = torch.Generator().manual_seed(seed)
@@ -88,7 +101,9 @@ def run(flip_mode: str, args) -> dict:
     set_seed(args.seed, deterministic=False)
 
     transform = (
-        BrokenFlipTransform(0.5) if flip_mode == "image_only" else DetectionTransform(hflip_prob=0.5)
+        BrokenFlipTransform(0.5)
+        if flip_mode == "image_only"
+        else DetectionTransform(hflip_prob=0.5)
     )
     train_ids = subset(SOURCE, "train", args.n_train)
     dataset = VOCDetection(SOURCE, "train", transforms=transform, ids=train_ids)
@@ -135,7 +150,8 @@ def run(flip_mode: str, args) -> dict:
 def report(results: list[dict]) -> str:
     by_mode = {r["flip_mode"]: r for r in results}
     lines = [
-        "| flip during training | raw/val AP50 (90% seen) | raw/test AP50 (unseen) | leak inflation |",
+        "| flip during training | raw/val AP50 (90% seen) "
+        "| raw/test AP50 (unseen) | leak inflation |",
         "|---|---|---|---|",
     ]
     for mode, r in by_mode.items():
