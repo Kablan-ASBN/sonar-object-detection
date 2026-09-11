@@ -52,3 +52,18 @@ checkpoints/
 # Datasets (Handled externally) can be shared with Seabed.AI and my supervisor if necessary
 # ================================
 data/
+
+# ================================
+# Local environments and run artifacts
+# ================================
+.venv/
+.venv*/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+runs/
+experiments/results/*.json

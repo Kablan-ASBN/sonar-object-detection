@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check src/sonar tests
+
+      - name: Test
+        run: pytest -q
+
+      # The original project shipped splits in which 219 of 242 validation images were also in the
+      # training set. This step is the gate that would have caught it.
+      - name: Split leakage gate
+        if: hashFiles('data/line2voc/ImageSets/Main/train.txt') != ''
+        run: |
+          sonar audit leakage \
+            --root raw=data/line2voc \
+            --root denoised=data/line2voc_preprocessed \
+            --root augmented=data/line2voc_preprocessed_augmented
