@@ -313,9 +313,17 @@ def _optimise(
     scaler.update()
 
 
-def _grad_scaler(cfg: TrainConfig, device: torch.device) -> torch.cuda.amp.GradScaler:
-    """Loss scaling only buys anything for fp16 on CUDA; CPU autocast runs in bfloat16."""
-    return torch.cuda.amp.GradScaler(enabled=cfg.amp and device.type == "cuda")
+def _grad_scaler(cfg: TrainConfig, device: torch.device) -> Any:
+    """Loss scaling only buys anything for fp16 on CUDA; CPU autocast runs in bfloat16.
+
+    torch 2.4 moved the scaler to `torch.amp` and deprecated the `torch.cuda.amp` spelling,
+    but the last torch built for Intel macOS is 2.2, so both have to work.
+    """
+    enabled = cfg.amp and device.type == "cuda"
+    factory = getattr(torch.amp, "GradScaler", None)
+    if factory is not None:
+        return factory("cuda", enabled=enabled)
+    return torch.cuda.amp.GradScaler(enabled=enabled)
 
 
 def _split_batch(batch: Any) -> tuple[list[Tensor], list[dict]]:

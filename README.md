@@ -63,7 +63,7 @@ src/sonar/
   engine/      training loops, COCO and FROC metrics, prediction export
   audit/       split leakage and annotation checks
   cli.py       sonar convert | split | preprocess | audit | train | eval | predict
-tests/         176 tests, including a regression test for every defect in the audit
+tests/         262 tests, including a regression test for every defect in the audit
 experiments/   the ablation that prices the defects, and a script that recomputes the audit
 docs/          AUDIT.md, ARCHITECTURE.md, and the archived 2025 splits as evidence
 configs/       one YAML per experiment
@@ -74,7 +74,7 @@ notebooks/     the original Colab notebooks, kept unchanged as the record
 
 ```bash
 make setup      # venv + editable install
-make test       # 176 tests
+make test       # 262 tests
 make lint
 make audit      # exits 1 if any training split overlaps any evaluation split
 ```

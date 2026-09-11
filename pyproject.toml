@@ -14,7 +14,9 @@ authors = [{ name = "Gomis Kablan Assebian" }]
 dependencies = [
     "torch>=2.0",
     "torchvision>=0.15",
-    "torchmetrics>=1.2",
+    # The [detection] extra is what pulls pycocotools; MeanAveragePrecision raises
+    # ModuleNotFoundError at construction time without it.
+    "torchmetrics[detection]>=1.2",
     "numpy<2",
     "opencv-python-headless",
     "pillow",

@@ -148,7 +148,11 @@ class RecordingScaler:
 
     def __init__(self, events: list[str]) -> None:
         self.events = events
-        self.inner = torch.cuda.amp.GradScaler(enabled=False)
+        # Mirrors _grad_scaler: torch 2.4 moved this and deprecated the old spelling.
+        factory = getattr(torch.amp, "GradScaler", None)
+        self.inner = (
+            factory("cuda", enabled=False) if factory else torch.cuda.amp.GradScaler(enabled=False)
+        )
 
     def scale(self, loss: Tensor) -> Tensor:
         self.events.append("scale")
