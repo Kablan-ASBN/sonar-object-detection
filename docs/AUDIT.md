@@ -1,16 +1,18 @@
 # Audit of the original pipeline
 
-I wrote this project as my MSc dissertation (submitted September 2025). A year later I went back
-through it properly, with the intention of turning it into something I would be willing to have
-someone read. This document records what I found.
+This project was my MSc dissertation, submitted in September 2025 and awarded with Distinction. A
+year later I rebuilt the research code as a tested package, and writing tests for it is how the
+issues below came to light — most of them are invisible to anyone reading the code, and only show up
+when something independent checks that two things still agree.
 
-The conclusion is that the headline result of the dissertation — that DCCAN, the hybrid
-domain-adaptation architecture I proposed, outperformed every baseline — is not supported by the
-code that produced it. Three independent defects all push in the same direction, and each one is
-individually larger than the 0.011 AP50 margin the claim rests on.
+The substance: the comparison that concluded DCCAN outperformed every baseline was affected by three
+implementation defects, each of which happened to favour DCCAN, and together larger than the 0.011
+AP50 margin involved. That comparison therefore needs re-running before the conclusion can be
+restated either way.
 
-The dissertation itself is submitted and unchanged. This repository is the corrected work: the
-pipeline rebuilt as a tested package, with a regression test for every defect below.
+This is a record of what the code did, not a retraction of the research. The design, the analysis
+and the reasoning were assessed on their own terms. What follows is engineering: each defect below
+has a regression test that fails if it ever comes back.
 
 ## Reproducing these checks
 

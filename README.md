@@ -7,24 +7,25 @@ raw survey imagery but the labelled data it was trained on looks different. The 
 Faster R-CNN with a ResNet-50 FPN backbone; the domain adaptation is DANN and DCCAN, a three-path
 adversarial architecture I proposed for my MSc dissertation.
 
-This started as that dissertation, submitted to the University of Greenwich in September 2025 off
-the back of a research placement at [Seabed.AI](https://seabed.ai). A year later I went back
-through it properly and audited my own results.
+This began as my MSc dissertation, submitted to the University of Greenwich in September 2025 and
+**awarded with Distinction**, off the back of a research placement at [Seabed.AI](https://seabed.ai).
+A year later I came back to rebuild the research code as a proper package — and rebuilding it is how
+I found things the original implementation had been doing that I had not known about.
 
-**I found that the headline claim does not hold.** Three separate defects each gave the model I was
-proposing an advantage over the models I was comparing it against, and each of them is bigger than
-the 0.011 AP50 margin the claim rested on. On top of that, 219 of the 242 validation images had
-been in the labelled training set.
+Three of them each favoured the model I was proposing over the baselines I compared it against, and
+together they are larger than the 0.011 AP50 margin that comparison rested on. So that particular
+claim needs re-running before it can be made again. The pipeline for doing that is in this
+repository, and the audit below says exactly what to correct for.
 
-So this repository is two things: the pipeline rebuilt as something I would be willing to defend,
-and [a written audit of what was wrong with the first version](docs/AUDIT.md). The dissertation
-itself is submitted and unchanged.
+None of this changes the dissertation, which was assessed on its design, analysis and writing and
+stands as submitted. What changed is that I now have the tooling to check the implementation, and
+the habit of doing it.
 
-## The three defects
+## What the rebuild found
 
 Full detail, with evidence and line references, is in [docs/AUDIT.md](docs/AUDIT.md).
 
-| | What happened | Why it favoured the proposed model |
+| | What the code did | Why it favoured the proposed model |
 |---|---|---|
 | **Mismatched export protocols** | The three baselines were written to CSV behind `if float(s) < SCORE_THRESH: continue` with `SCORE_THRESH = 0.5`. DANN and DCCAN were exported with `score_thresh = 0.0`. | COCO AP integrates precision across the whole recall range. Only the baselines lost their low-confidence tail. |
 | **Flip augmentation desynchronised the labels** | `RandomHorizontalFlip` was applied as `img = transforms(img)`, so the pixels moved and the boxes did not. | It hit the three baselines and DANN. DCCAN's transform has no flip, so it was the only model trained on labels that were right. |
@@ -85,14 +86,27 @@ make audit      # exits 1 if any training split overlaps any evaluation split
 Training needs a GPU. On an A100 the original runs took a couple of hours each; on a CPU a single
 ResNet-50 run is about forty hours, so the ablation below uses a MobileNetV3 backbone at 320px.
 
+The seeded split is already applied and committed, so training starts at step two. `--mode raw` is
+not optional: it records in a sidecar that no score floor was applied, and `sonar eval` refuses a
+filtered file without it.
+
 ```bash
-sonar split --root data/line2voc \
-            --also-root data/line2voc_preprocessed \
-            --also-root data/line2voc_preprocessed_augmented --seed 42
-sonar train --config configs/dccan.yaml
-sonar predict --checkpoint runs/dccan/best.pt --root data/line2voc --split test --out preds.csv
-sonar eval --gt-root data/line2voc --split test --preds dccan=preds.csv
+sonar audit leakage --root raw=data/line2voc \
+                    --root denoised=data/line2voc_preprocessed   # must exit 0
+
+for cfg in baseline_raw baseline_denoised dann dccan; do
+  sonar train   --config configs/$cfg.yaml --out runs/$cfg.pt --device cuda
+  sonar predict --checkpoint runs/$cfg.pt --root data/line2voc --split test \
+                --out preds/$cfg.csv --mode raw
+done
+
+sonar eval --gt-root data/line2voc --split test \
+  --preds raw=preds/baseline_raw.csv --preds denoised=preds/baseline_denoised.csv \
+  --preds dann=preds/dann.csv --preds dccan=preds/dccan.csv
 ```
+
+One ground truth, one split, one postprocessing config, four models. That last command is the
+comparison the audit says the original one could not be.
 
 ## What the rebuild does differently
 
@@ -143,9 +157,12 @@ dissertation's description does not match the code — the stated objective appl
 weight when the code applies it as a gradient reversal coefficient, and the "P3" feature map is
 actually P2.
 
-What I can still defend from the original work is narrow, and I do still believe it: the three-path
-design trains stably under automatic mixed precision, where a standalone CDAN outer-product mapping
-did not. Whether it detects better than a plain baseline is, after the audit, an open question.
+One claim from the original work survives intact, and I still stand behind it: the three-path design
+trains stably under automatic mixed precision, where a standalone CDAN outer-product mapping did
+not. That was the hard part of the architecture and it holds up. Whether it *detects* better than a
+plain baseline is a separate question, and the honest answer is that the experiment needs running
+again on the corrected pipeline. `configs/` and the Colab recipe below are set up to do exactly
+that.
 
 ## Data
 
@@ -161,7 +178,7 @@ files; `docs/evidence/original_splits/` preserves the 2025 splits as the evidenc
 ## Provenance
 
 Kablan Assebian. MSc Data Science dissertation, University of Greenwich, submitted 8 September
-2025, supervised by Professor Chris Walshaw. Dataset and placement from Seabed.AI. DCCAN was proposed and implemented
+2025 and awarded with Distinction, supervised by Professor Chris Walshaw. Dataset and placement from Seabed.AI. DCCAN was proposed and implemented
 as part of that work.
 
 Research use only.
