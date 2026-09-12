@@ -1,0 +1,46 @@
+# Matched control for the DCCAN row. Identical training recipe, optimiser, learning rate,
+# batch size and warm-up; the three adversarial weights are zero. Any difference between this
+# and dccan.yaml is attributable to the adversarial paths and nothing else.
+name: dccan_no_adapt
+
+mode: dccan
+
+model:
+  backbone: resnet50
+  num_classes: 3
+  pretrained: true
+  min_size: 800
+  max_size: 1333
+
+data:
+  source_root: data/line2voc_preprocessed   # labelled, median filtered
+  target_root: data/line2voc                # unlabelled, raw
+  train_split: train
+  val_root: data/line2voc
+  val_split: val
+  hflip: 0.5
+
+adaptation:
+  dann_lambda: 0.0
+  cdan_lambda: 0.0
+  proposal_lambda: 0.0
+  cdan_temperature: 0.6
+  conf_thresh_start: 0.40
+  conf_thresh_end: 0.20
+  conditioning: proxy       # "proxy" trains the auxiliary classifier; "roi" conditions on the box head
+  proxy_aux_weight: 1.0
+  feature_level: "0"
+
+train:
+  epochs: 20
+  batch_size: 12
+  optimizer: sgd
+  lr: 1.5e-3
+  disc_lr: 4.5e-4
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  clip_grad_norm: 5.0
+  freeze_backbone_epochs: 2
+  amp: true
+  seed: 1337
+  num_workers: 4
