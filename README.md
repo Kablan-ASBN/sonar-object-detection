@@ -160,8 +160,8 @@ files; `docs/evidence/original_splits/` preserves the 2025 splits as the evidenc
 
 ## Provenance
 
-MSc Data Science dissertation, University of Greenwich, submitted 8 September 2025, supervised by
-Professor Chris Walshaw. Dataset and placement from Seabed.AI. DCCAN was proposed and implemented
+Kablan Assebian. MSc Data Science dissertation, University of Greenwich, submitted 8 September
+2025, supervised by Professor Chris Walshaw. Dataset and placement from Seabed.AI. DCCAN was proposed and implemented
 as part of that work.
 
 Research use only.

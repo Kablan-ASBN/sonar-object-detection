@@ -9,7 +9,7 @@ Original file is located at
 # **Title: Object Detection in Sidescan Sonar Data Using Transfer Learning and Domain Adaptation to Reduce the Need for Manual Annotation**
 
 **Author**
-Gomis Kablan Assebian
+Kablan Assebian
 MSc Data Science Candidate, 2024-2025
 
 ---

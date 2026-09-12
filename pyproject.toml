@@ -9,7 +9,7 @@ description = "Object and shadow detection in sidescan sonar under domain shift"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "Research use only" }
-authors = [{ name = "Gomis Kablan Assebian" }]
+authors = [{ name = "Kablan Assebian" }]
 
 dependencies = [
     "torch>=2.0",
