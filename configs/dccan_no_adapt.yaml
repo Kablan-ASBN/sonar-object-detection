@@ -43,4 +43,5 @@ train:
   freeze_backbone_epochs: 2
   amp: true
   seed: 1337
+  deterministic: true
   num_workers: 4

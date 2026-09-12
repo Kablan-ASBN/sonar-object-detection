@@ -1,0 +1,11 @@
+# sonar eval on raw/test, 180 images, unfiltered predictions (--mode raw)
+# second run of retrain_colab.ipynb, identical code, config and seed as run 1
+
+ground truth: root=data/line2voc split=test, 180 images, 2877 boxes
+            mAP   AP50   AP75  mAR100  AP50_object  AP50_shadow
+model                                                          
+raw      0.0367 0.1448 0.0062  0.1534       0.0919       0.1978
+denoised 0.0308 0.1310 0.0035  0.1505       0.0718       0.1902
+dccan    0.0319 0.1279 0.0078  0.1398       0.0938       0.1620
+dann     0.0297 0.1141 0.0040  0.1392       0.0829       0.1452
+wrote /content/drive/MyDrive/sonar-runs/froc.csv

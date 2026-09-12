@@ -10,36 +10,56 @@ architecture I proposed for my MSc dissertation.
 The dissertation was submitted to the University of Greenwich in September 2025 and **awarded with
 Distinction**, off the back of a research placement at [Seabed.AI](https://seabed.ai). A year later
 I rebuilt the research code as a tested, installable package and re-ran every experiment on a
-stricter protocol. This repository is that rebuild.
+stricter protocol. This repository is that rebuild, and the re-run turned up something more useful
+than a better number: the run-to-run variation on this benchmark is larger than any of the
+differences being measured, including the margin the dissertation reported.
 
 ## Result
 
 Four models, one seeded split shared by every dataset variant, all scored on the same 180-image test
-split with unfiltered predictions. Reproduce it with [`retrain_colab.ipynb`](retrain_colab.ipynb).
+split with unfiltered predictions. Produced by [`retrain_colab.ipynb`](retrain_colab.ipynb); both
+runs are recorded under [`experiments/results/`](experiments/results/).
 
-| Model | trained on | AP50 | mAP | mAR@100 | object | shadow |
-|---|---|---|---|---|---|---|
-| *raw baseline (in-domain ceiling)* | *raw* | *0.1619* | *0.0403* | *0.1592* | *0.1087* | *0.2151* |
-| **DCCAN** | denoised | **0.1299** | **0.0322** | **0.1450** | **0.0939** | **0.1658** |
-| source-only baseline | denoised | 0.1141 | 0.0280 | 0.1439 | 0.0723 | 0.1559 |
-| DANN | denoised | 0.1131 | 0.0290 | 0.1396 | 0.0795 | 0.1468 |
+The headline is not which model won. It is that **two runs of identical code, identical config and
+the same seed produced different orderings.**
+
+| Model | trained on | run 1 AP50 | run 2 AP50 | mean | spread |
+|---|---|---|---|---|---|
+| *raw baseline (in-domain ceiling)* | *raw* | *0.1619* | *0.1448* | *0.1534* | *0.0171* |
+| DCCAN | denoised | 0.1299 | 0.1279 | 0.1289 | 0.0020 |
+| source-only baseline | denoised | 0.1141 | 0.1310 | 0.1226 | 0.0169 |
+| DANN | denoised | 0.1131 | 0.1141 | 0.1136 | 0.0010 |
 
 The three adaptation rows train on the denoised source domain and are tested on raw, so they are
 doing real transfer. The raw baseline trains on the target domain itself, which makes it a ceiling
 rather than a competitor: it shows what you would get if you already had target labels.
 
-Among the methods that cross the domain gap, DCCAN scores 0.0158 AP50 above source-only training
-and DANN scores 0.0010 below it. The ordering holds on every column and both classes, so it is not an
-artifact of one threshold.
+In run 1, DCCAN sat 0.0158 AP50 above source-only training. In run 2 it sat 0.0031 below it. Nothing
+changed between the two except nondeterminism inside the runs themselves.
 
-**What I am not claiming is that the 0.0158 comes from the adversarial paths.** The DCCAN and
-source-only configs inherit the dissertation's hyperparameters, and those differ in more than the
-adaptation: SGD at 1.5e-3 with a two-epoch backbone freeze against AdamW at 2e-4 with none, plus
-different batch size and weight decay. The gain is real and measured; its cause is confounded.
-[`configs/dccan_no_adapt.yaml`](configs/dccan_no_adapt.yaml) is the matched control, byte-identical
-to `dccan.yaml` except the three adversarial weights are zero, and running it is the next thing on
-the list. Until then the honest statement is that the three-path configuration scores highest among
-the cross-domain models, not that adversarial alignment is why.
+**The noise floor is therefore about 0.017 AP50, and every effect in this table is smaller than
+that.** The 0.011 margin the dissertation reported is smaller still. Single-run comparisons at this
+scale cannot separate these models, and that holds independently of the three implementation defects
+in [docs/AUDIT.md](docs/AUDIT.md): even a defect-free single run could not have supported the
+original conclusion.
+
+Two things are stable across both runs and worth stating:
+
+- The in-domain ceiling is highest in both. Training on the target domain beats adapting to it,
+  which is what a ceiling is for.
+- DANN is last in both and beats source-only training in neither. Global alignment alone does not
+  help here, and that is the one comparative claim the data currently supports.
+
+DCCAN against source-only is **undetermined**. Separating them needs several seeds per model with
+`deterministic: true`, reporting mean and spread rather than a single number: twelve runs at roughly
+twenty minutes each. Quoting the run-1 figure on its own would have been a smaller version of the
+mistake the audit is about.
+
+Why identical seeds diverge: [`utils/seed.py`](src/sonar/utils/seed.py) seeds Python, NumPy and
+torch, but the configs leave `deterministic` off, so cuDNN picks algorithms by timing and
+non-deterministic GPU atomics in the detection heads accumulate differently. That file's own
+docstring says any run whose numbers get reported should turn it on. These did not, and the table
+above is what that costs.
 
 Absolute numbers are low because the task is hard: 500x500 sonar tiles, heavy speckle, and objects
 that are often a few dozen pixels of slightly brighter return. Shadows score about twice what objects
@@ -57,6 +77,7 @@ do, which matches how a human reads a sonar waterfall.
 | Evaluation you can trust: COCO metrics, FROC, and prediction files that record their own postprocessing | [`engine/evaluate.py`](src/sonar/engine/evaluate.py) |
 | Data engineering: YOLO to Pascal VOC conversion, seeded stratified splits, annotation and leakage audits | [`data/`](src/sonar/data/), [`audit/`](src/sonar/audit/) |
 | Debugging and root-cause analysis on someone else's code, where that someone was me a year ago | [`docs/AUDIT.md`](docs/AUDIT.md) |
+| Knowing when not to report a result: measured the run-to-run noise floor and found it larger than the effect | [`experiments/results/`](experiments/results/) |
 
 Built with PyTorch, torchvision, torchmetrics, pycocotools, NumPy, OpenCV, pytest, ruff and GitHub
 Actions. Trained on an A100 through Colab.

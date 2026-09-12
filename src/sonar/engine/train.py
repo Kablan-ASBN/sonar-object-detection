@@ -45,6 +45,10 @@ class TrainConfig:
     seed: int = 1337
     freeze_backbone_epochs: int = 0
     disc_lr: float | None = None
+    # Off by default because it costs throughput. Any run whose numbers get reported
+    # should set it: without it cuDNN picks algorithms by timing and two runs of the
+    # same seed diverge by more than the effects this project measures.
+    deterministic: bool = False
 
 
 @dataclass
@@ -106,7 +110,7 @@ def train_baseline(
     built beforehand.
     """
     device = torch.device(device)
-    set_seed(cfg.seed)
+    set_seed(cfg.seed, deterministic=cfg.deterministic)
     model.to(device)
 
     optimizer = build_optimizer(model, cfg)
@@ -157,7 +161,7 @@ def train_adaptive(
     `train_baseline`, this reseeds the global RNG from `cfg.seed`.
     """
     device = torch.device(device)
-    set_seed(cfg.seed)
+    set_seed(cfg.seed, deterministic=cfg.deterministic)
     model.to(device)
 
     optimizer = build_optimizer(model, cfg, _domain_parameters(model))

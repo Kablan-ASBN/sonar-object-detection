@@ -507,3 +507,22 @@ def test_load_checkpoint_accepts_a_model_only_dict(tmp_path):
 def test_load_checkpoint_reports_the_missing_path(tmp_path):
     with pytest.raises(FileNotFoundError, match=r"absent\.pt"):
         load_checkpoint(tmp_path / "absent.pt", nn.Linear(2, 2))
+
+
+def test_deterministic_flag_reaches_set_seed(loader, monkeypatch):
+    """Regression: the flag existed in set_seed but TrainConfig had no way to set it.
+
+    Two runs of the same seed diverged by more than the effects being measured because the
+    configs could not turn cuDNN autotuning off. See experiments/results/README.md.
+    """
+    seen: list[tuple[int, bool]] = []
+    monkeypatch.setattr(
+        train_module, "set_seed", lambda seed, deterministic=False: seen.append((seed, deterministic))
+    )
+
+    train_baseline(StubDetector(), loader, TrainConfig(epochs=1, seed=7, num_workers=0))
+    train_baseline(
+        StubDetector(), loader, TrainConfig(epochs=1, seed=7, num_workers=0, deterministic=True)
+    )
+
+    assert seen == [(7, False), (7, True)]

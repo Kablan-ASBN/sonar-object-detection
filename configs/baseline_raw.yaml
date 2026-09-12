@@ -23,4 +23,5 @@ train:
   clip_grad_norm: 5.0
   amp: true
   seed: 1337
+  deterministic: true
   num_workers: 4
