@@ -129,8 +129,8 @@ could not reproduce its own headline claim. Reproduce them with
 `python experiments/reproduce_audit.py`.
 
 `experiments/ablation.py` measures the defects directly rather than arguing about them. One
-training run on the denoised source answers two at once, because raw validation shares 219 of its
-242 ids with that training set and raw test shares none, so the gap between the two is the leak.
+training run on the denoised source answers two at once, because under the archived 2025 splits raw validation shares 219 of
+its 242 ids with that training set and raw test shares none, so the gap between the two is the leak.
 Running it twice, with and without the flip bug, prices the third.
 
 ## Architecture
