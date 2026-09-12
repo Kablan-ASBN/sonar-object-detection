@@ -70,6 +70,7 @@ experiments/   the ablation that prices the defects, and a script that recompute
 docs/          AUDIT.md, ARCHITECTURE.md, and the archived 2025 splits as evidence
 configs/       one YAML per experiment
 notebooks/     the original Colab notebooks, kept unchanged as the record
+retrain_colab.ipynb   the clean re-run: four models, one ground truth, one split
 ```
 
 ## Running it
